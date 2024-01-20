@@ -1,56 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_swap.c                                          :+:      :+:    :+:   */
+/*   op_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:50:38 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 20:12:30 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:15:49 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_internal.h"
 
-static void	op_s(t_dlist **root, int debug_lvl)
+static void	op_p(t_dlist **from, t_dlist **to, int debug_lvl)
 {
 	int	sz;
 	t_dlist	*a;
-	t_dlist *b;
 
 	(void)debug_lvl;
-	sz = ft_dlist_size(*root);
-	if (sz < 2)
+	sz = ft_dlist_size(*from);
+	if (sz < 1)
 		return ;
-	a = *root;
-	b = (*root)->next;
-	a->next = b->next;
-	a->next->prev = a;
-	b->next = a;
-	b->prev = a->prev;
-	b->prev->next = b;
-	a->prev = b;
-	*root = b;
+	a = *from;
+	if (sz == 1)
+		*from = 0;
+	else
+	{
+		(*from)->prev = (*from)->prev->prev;
+		a->prev->next = (*from)->next;
+		*from = (*from)->next;
+	}
+	ft_dlist_add_front(to, a);
 }
 
-void	op_sa(t_dlist **a, int debug_lvl)
+void	op_pa(t_dlist **a, t_dlist **b, int debug_lvl)
 {
 	if ((debug_lvl & 32) > 0)
-		ft_printf("sa\n");
-	op_s(a, debug_lvl);
+		ft_printf("pa\n");
+	op_p(b, a, debug_lvl);
 }
 
-void	op_sb(t_dlist **b, int debug_lvl)
+void	op_pb(t_dlist **a, t_dlist **b, int debug_lvl)
 {
 	if ((debug_lvl & 32) > 0)
-		ft_printf("sb\n");
-	op_s(b, debug_lvl);
-}
-
-void	op_ss(t_dlist **a, t_dlist **b, int debug_lvl)
-{
-	if ((debug_lvl & 32) > 0)
-		ft_printf("ss\n");
-	op_s(a, debug_lvl);
-	op_s(b, debug_lvl);
+		ft_printf("pb\n");
+	op_p(a, b, debug_lvl);
 }

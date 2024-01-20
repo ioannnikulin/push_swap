@@ -6,13 +6,12 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 18:38:17 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:19:58 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
-#include <stdlib.h>
-#include "libft/libft.h"
+#include "push_swap_internal.h"
+#define CUR_DEBUG MAX_DEBUG
 
 static int	my_atoi(char **c, int *err)
 {
@@ -83,6 +82,31 @@ static int	parse_params(t_dlist **a, int argc, char **argv)
 	return (ft_dlist_size(*a));
 }
 
+void	print(t_dlist *a, t_dlist *b, int debug_lvl)
+{
+	char delim[2];
+
+	delim[0] = ' ';
+	delim[1] = 0;
+	if ((debug_lvl & BORDER_PRINTOUT) > 0)
+		ft_printf("\n================================");
+	if ((debug_lvl & NEWLINE_BETWEEN_ELEMENTS) > 0)
+		delim[0] = '\n';
+	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
+		ft_printf("\nStack A:\n");
+	ft_dlist_print(a, debug_lvl, delim);
+	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
+		ft_printf("--------\n");
+	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
+		ft_printf("\nStack B:\n");
+	ft_dlist_print(b, debug_lvl, delim);
+	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
+		ft_printf("--------\n");
+	if ((debug_lvl & BORDER_PRINTOUT) > 0)
+		ft_printf("\n================================");
+	ft_printf("\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_dlist	*a;
@@ -95,7 +119,12 @@ int	main(int argc, char **argv)
 		ft_fprintf(2, "Error\n");
 		return (0);
 	}
-	ft_dlist_print(a, 31, "\n");
+	print(a, b, 0);
+	op_sa(&a, 0);
+	print(a, b, 0);
+	op_pb(&a, &b, 0);
+	print(a, b, 0);
+
 	//sort(&a, &b);
 	return (0);
 }
