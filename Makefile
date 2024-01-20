@@ -39,4 +39,16 @@ run:
 debug: 
 	gdbtui --args $(CALL:'=)
 
+TESTF = .
+TEST_NAMES = tests.c
+TEST_SRCS = $(addprefix $(TESTF)/, $(TEST_NAMES))
+TEST_OBJS = $(TEST_SRCS:.c=.o)
+
+$(TEST_OBJS): %.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
+
+errors: $(NAME) $(TEST_OBJS)
+	$(CC) -o $@ $(TEST_OBJS)
+	./$@
+
 .PHONY: all clean fclean re test libft

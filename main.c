@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 16:40:00 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:38:17 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 
-static int my_atoi(char **c, int *err)
+static int	my_atoi(char **c, int *err)
 {
 	long	curval;
-	int	sign;
+	int		sign;
 
 	curval = 0;
 	sign = 1;
+	*err = 1;
 	while (**c == ' ' || **c == '+' || **c == '-')
 	{
 		if (**c == '-')
 			sign = -sign;
-		(*c) ++;
+		(*c)++;
 	}
 	while (**c >= '0' && **c <= '9')
 	{
 		curval = curval * 10 + *((*c)++) - '0';
-		if ((sign > 0 && curval > INT_MAX) || (sign < 0 && curval < INT_MIN))
+		*err = 0;
+		if ((sign > 0 && curval > INT_MAX) || (sign < 0 && -curval < INT_MIN))
 			(*err) = 1;
 	}
 	if (**c != ' ' && **c != '\0')
@@ -40,8 +42,16 @@ static int my_atoi(char **c, int *err)
 
 static int	make_node(t_dlist **a, int curval)
 {
-	int	*content;
-	
+	int		*content;
+	t_dlist	*cur;
+
+	cur = *a;
+	while (cur)
+	{
+		if (*(int *)cur->content == curval)
+			return (1);
+		cur = cur->next;
+	}
 	content = malloc(sizeof(int));
 	if (!content)
 		return (1);
@@ -50,7 +60,7 @@ static int	make_node(t_dlist **a, int curval)
 	return (0);
 }
 
-static int	parse_params(t_dlist** a, int argc, char **argv)
+static int	parse_params(t_dlist **a, int argc, char **argv)
 {
 	int		curval;
 	int		curarg;
@@ -60,7 +70,7 @@ static int	parse_params(t_dlist** a, int argc, char **argv)
 	while (++ curarg < argc)
 	{
 		if (*(argv[curarg]) == '"')
-			(argv[curarg]) ++;
+			(argv[curarg])++;
 		while (*argv[curarg])
 		{
 			curval = my_atoi(&(argv[curarg]), &err);
@@ -75,8 +85,8 @@ static int	parse_params(t_dlist** a, int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_dlist*	a;
-	t_dlist*	b;
+	t_dlist	*a;
+	t_dlist	*b;
 
 	a = 0;
 	b = 0;
