@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:16:17 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 16:23:51 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:21:17 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ void	ft_list_clear(t_list **lst, void (*del)(void *));
 void	ft_list_iter(t_list *lst, void (*f)(void *));
 t_list	*ft_list_map(t_list *lst, void *(*f)(void *), void (*del)(void *));
 // -------- double-linked lists --------
+# define ADDR 1
+# define PREV 2
+# define NEXT 4
+# define ANGLES 8
+# define CHECK 16
+
 typedef struct s_dlist
 {
 	void			*content;

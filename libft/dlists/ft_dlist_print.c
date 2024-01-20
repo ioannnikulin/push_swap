@@ -6,17 +6,12 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 16:47:24 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:21:29 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-#define ADDR 1
-#define PREV 2
-#define NEXT 4
-#define ANGLES 8
-#define CHECK 16
 
 static int	print_node_and_check(t_dlist *cur, int mode)
 {

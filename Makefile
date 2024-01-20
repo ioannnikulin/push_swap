@@ -3,7 +3,7 @@ NAME = push_swap
 CFLAGS = -Wall -Wextra -Werror
 
 FOLDER = .
-FILENAMES = main.c
+FILENAMES = main.c op_swap.c
 SRCS = $(addprefix $(FOLDER)/, $(FILENAMES))
 OBJS = $(SRCS:.c=.o)
 INCLUDES = -I. -Ilibft
