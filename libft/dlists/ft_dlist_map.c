@@ -6,28 +6,24 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 16:35:18 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:34:13 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static t_dlist	*connect_tail(t_dlist **res, t_dlist *res_tail, t_dlist *orig)
+static t_dlist	*connect_tail( \
+	t_dlist **res, t_dlist *res_tail, t_dlist *orig, void (*d)(void*))
 {
-	t_dlist	*orig_loop_to;
-	t_dlist	*res_iter;
+	t_dlist	*loop_to;
 
-	orig_loop_to = ft_dlist_last(orig)->next;
-	if (!orig_loop_to)
+	loop_to = ft_dlist_last(orig)->next;
+	if (!loop_to)
 		return (*res);
-	res_iter = *res;
-	while (orig != orig_loop_to)
-	{
-		res_iter = res_iter->next;
-		orig = orig->next;
-	}
-	res_tail->next = res_iter;
-	res_tail->next->prev = res_tail;
+	if (loop_to != orig)
+		return ((t_dlist *)ft_dlist_clear(res, d, 0));
+	res_tail->next = *res;
+	(*res)->prev = res_tail;
 	return (*res);
 }
 

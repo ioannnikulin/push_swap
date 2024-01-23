@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 16:34:48 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:14:30 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,12 @@ t_dlist	*ft_dlist_generate(char *texts[], int end_to)
 	idx = make_worm(&root, texts);
 	if (idx == -1)
 		return (0);
-	if (end_to >= idx)
+	if (end_to != -1 && end_to != 0)
 		return ((t_dlist *)(unsigned long long)ft_dlist_clear(&root, free, 0));
 	if (end_to == -1)
 		return (root);
 	tail = ft_dlist_last(root);
-	idx = -1;
-	curnode = root;
-	while (++ idx < end_to)
-		curnode = curnode->next;
-	tail->next = curnode;
-	curnode->prev = tail;
+	tail->next = root;
+	root->prev = tail;
 	return (root);
 }
