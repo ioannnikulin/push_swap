@@ -4,3 +4,4 @@ libft/tests/*
 *.a
 errors
 *.txt
+tests
