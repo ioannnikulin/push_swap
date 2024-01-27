@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 14:51:34 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:37:31 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 # define OP_TEST_NUMBERS 1024
 # define OP_TEST_DETAILS 2048
 # define OP_TEST_FULLDETAILS 4096
-# define MAX_DEBUG 8191
+# define OP_TEST_BORDER 8192
+# define MAX_DEBUG 16383
 
-void	print(t_dlist *a, t_dlist *b, int debug_lvl);
+int	print(t_dlist *a, t_dlist *b, int debug_lvl);
 void	op_sa(t_dlist **a, int debug_lvl);
 void	op_sb(t_dlist **b, int debug_lvl);
 void	op_ss(t_dlist **a, t_dlist **b, int debug_lvl);

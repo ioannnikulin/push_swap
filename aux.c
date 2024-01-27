@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 14:21:00 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:40:38 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,10 @@ int	parse_params(t_dlist **a, int argc, char **argv)
 	return (ft_dlist_size(*a));
 }
 
-void	print(t_dlist *a, t_dlist *b, int debug_lvl)
+int	print(t_dlist *a, t_dlist *b, int debug_lvl)
 {
-	char delim[2];
+	char	delim[2];
+	int		ret;
 
 	delim[0] = ' ';
 	delim[1] = 0;
@@ -93,15 +94,16 @@ void	print(t_dlist *a, t_dlist *b, int debug_lvl)
 		delim[0] = '\n';
 	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
 		ft_printf("\nStack A:\n");
-	ft_dlist_print(a, debug_lvl, delim);
+	ret = ft_dlist_print(a, debug_lvl, delim);
 	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
 		ft_printf("--------\n");
 	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
 		ft_printf("\nStack B:\n");
-	ft_dlist_print(b, debug_lvl, delim);
+	ret = ret | ft_dlist_print(b, debug_lvl, delim);
 	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
 		ft_printf("--------\n");
 	if ((debug_lvl & BORDER_PRINTOUT) > 0)
 		ft_printf("\n================================");
 	ft_printf("\n");
+	return (ret);
 }

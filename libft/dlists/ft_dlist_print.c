@@ -6,14 +6,14 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 15:13:25 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:36:38 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int	print_node_and_check(t_dlist *cur, int mode)
+static int	print_node_and_check(t_dlist *cur, int debug_lvl)
 {
 	int	ret;
 
@@ -22,46 +22,48 @@ static int	print_node_and_check(t_dlist *cur, int mode)
 		ret = 1;
 	if (cur->next != 0 && cur->next->prev != cur)
 		ret = 1;
-	if ((mode & ANGLES) > 0)
+	if ((debug_lvl & ANGLES) > 0)
 		ft_printf("< ");
-	if ((mode & PREV) > 0)
+	if ((debug_lvl & PREV) > 0)
 		ft_printf("(%p) ", cur->prev);
-	if ((mode & ADDR) > 0)
+	if ((debug_lvl & ADDR) > 0)
 		ft_printf("[%p] ", cur);
 	ft_printf("%s", (char *)(cur->content));
-	if ((mode & NEXT) > 0)
+	if ((debug_lvl & NEXT) > 0)
 		ft_printf(" (%p)", cur->next);
-	if ((mode & ANGLES) > 0)
+	if ((debug_lvl & ANGLES) > 0)
 		ft_printf(" >");
 	return (ret);
 }
 
-static void	print_check(t_dlist *err)
+static int	print_check(t_dlist *err)
 {
 	if (err)
+	{
 		ft_printf("First inconsistency in links found at object %p\n", err);
-	else
-		ft_printf("Link incosistencies not found\n");
+		return (1);
+	}
+	ft_printf("Link incosistencies not found\n");
+	return (0);
 }
 
-void	ft_dlist_print(t_dlist *lst, int mode, char *delim)
+int	ft_dlist_print(t_dlist *lst, int debug_lvl, char *delim)
 {
 	t_dlist	*cur;
 	int		lstlen;
 	t_dlist	*err;
 
-	if (!lst)
-		return ;
 	lstlen = ft_dlist_size(lst);
 	cur = lst;
 	err = 0;
 	while (-- lstlen >= 0)
 	{
-		if (print_node_and_check(cur, mode) && !err)
+		if (print_node_and_check(cur, debug_lvl) && !err)
 			err = cur;
 		ft_printf("%s", delim);
 		cur = cur->next;
 	}
-	if ((mode & CHECK) > 0)
-		print_check(err);
+	if ((debug_lvl & CHECK) > 0)
+		return (print_check(err));
+	return (0);
 }

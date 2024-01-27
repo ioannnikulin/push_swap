@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:50:38 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 20:14:05 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:17:39 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static void	op_revr(t_dlist **root, int debug_lvl)
 {
 	(void)debug_lvl;
-	*root = (*root)->prev;
+	if (*root)
+		*root = (*root)->prev;
 }
 
 void	op_rra(t_dlist **a, int debug_lvl)

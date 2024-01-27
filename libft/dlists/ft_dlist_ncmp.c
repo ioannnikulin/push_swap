@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:41:58 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 14:35:47 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:37:42 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ int	ft_dlist_ncmp(t_dlist *a, t_dlist *b, int n, int (*cmp)(void *, void *))
 	int	alen;
 	int blen;
 	
-	cur = 0;
+	cur = 1;
 	if (a == b)
-		return (-1);
+		return (0);
 	alen = ft_dlist_size(a);
 	blen = ft_dlist_size(b);
-	while (cur < n && alen -- > 0 && blen -- > 0)
+	while (cur <= n && alen > 0 && blen > 0)
 	{
+		alen --;
+		blen --;
 		if (loop(a, b, cmp, &cur))
 			return (cur);
 	}

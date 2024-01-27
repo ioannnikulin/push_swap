@@ -1,6 +1,7 @@
 CC = cc
 NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
+PREFIX = @
 
 LIST_F = lists
 LIST_NAMES = ft_list_add_back.c ft_list_add_front.c ft_list_clear.c ft_list_delone.c ft_list_iter.c ft_list_generate.c ft_list_last.c ft_list_new.c ft_list_size.c ft_list_map.c
@@ -39,16 +40,16 @@ PACK = ar rcs
 all: $(NAME)
 
 $(NAME): clean $(OBJS) 
-	$(PACK) $(NAME) $(OBJS)
+	$(PREFIX)$(PACK) $(NAME) $(OBJS)
 
 $(OBJS): %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
+	$(PREFIX)$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
 
 clean:
-	rm -f $(OBJS)
+	$(PREFIX)rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(PREFIX)rm -f $(NAME)
 
 re: fclean all
 
@@ -72,34 +73,34 @@ SEGFAULTOBJS = $(SEGFAULTS:.c=.o)
 SEGFAULTNAMES = $(SEGFAULTS:.c=.sf)
 
 $(TESTOBJS): %.o: %.c
-	$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
+	$(PREFIX)$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
 
 $(SEGFAULTOBJS): %.o: %.c
-	$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
+	$(PREFIX)$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
 
 $(AUXOBJ): %.o: %.c
-	$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
+	$(PREFIX)$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
 
 testfclean:
-	rm -f $(TESTOBJS)
-	rm -f $(SEGFAULTOBJS)
-	rm -f $(TESTNAME)
-	rm -f $(SEGFAULTNAMES)
+	$(PREFIX)rm -f $(TESTOBJS)
+	$(PREFIX)rm -f $(SEGFAULTOBJS)
+	$(PREFIX)rm -f $(TESTNAME)
+	$(PREFIX)rm -f $(SEGFAULTNAMES)
 
 goodtests: $(TESTOBJS) $(AUXOBJ)
-	$(CC) $^ $(TESTFLAGS) $(TESTINCLUDES) -o $(TESTNAME) -g
+	$(PREFIX)$(CC) $^ $(TESTFLAGS) $(TESTINCLUDES) -o $(TESTNAME) -g
 
 $(SEGFAULTNAMES): %.sf: %.o $(AUXOBJ)
-	$(CC) $^ $(TESTFLAGS) $(TESTINCLUDES) -o $@ -g
+	$(PREFIX)$(CC) $^ $(TESTFLAGS) $(TESTINCLUDES) -o $@ -g
 
 test: $(SEGFAULTNAMES) goodtests
 
 retest: testfclean test
 
 go: re retest
-	tests/test
-	rm -rf tmp.tst
+	$(PREFIX)tests/test
+	$(PREFIX)rm -rf tmp.tst
 	# -------- Multiple segfaults expected, which is part of the testing. --------
 	# -------- Stay calm unless you see an error message in UPPER CASE. --------
-	$(SEGFAULTNAMES:%.sf=%.sf ||) true
+	$(PREFIX)$(SEGFAULTNAMES:%.sf=%.sf ||) true
 	# -------- Testing finished. --------
