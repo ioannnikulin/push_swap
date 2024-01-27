@@ -6,18 +6,17 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:50:38 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 20:50:59 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:40:34 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_internal.h"
 
-static void	op_p(t_dlist **from, t_dlist **to, int debug_lvl)
+static void	op_p(t_dlist **from, t_dlist **to)
 {
 	int	sz;
 	t_dlist	*a;
 
-	(void)debug_lvl;
 	sz = ft_dlist_size(*from);
 	if (sz < 1)
 		return ;
@@ -40,16 +39,16 @@ static void	op_p(t_dlist **from, t_dlist **to, int debug_lvl)
 	}
 }
 
-void	op_pa(t_dlist **a, t_dlist **b, int debug_lvl)
+void	op_pa(t_dlist **a, t_dlist **b)
 {
-	if ((debug_lvl & OP_NAME) > 0)
+	if ((CUR_DEBUG & OP_NAME) > 0)
 		ft_printf("pa\n");
-	op_p(b, a, debug_lvl);
+	op_p(b, a);
 }
 
-void	op_pb(t_dlist **a, t_dlist **b, int debug_lvl)
+void	op_pb(t_dlist **a, t_dlist **b)
 {
-	if ((debug_lvl & OP_NAME) > 0)
+	if ((CUR_DEBUG & OP_NAME) > 0)
 		ft_printf("pb\n");
-	op_p(a, b, debug_lvl);
+	op_p(a, b);
 }

@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
-/*   Updated: 2024/01/27 20:55:25 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:36:17 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_testcase {
 	char	*expb[10];
 }	t_testcase;
 
-void	op_tests(int debug_lvl)
+void	op_tests()
 {
 	t_dlist *a, *b;
 	t_testcase t[SZ];
@@ -91,16 +91,16 @@ void	op_tests(int debug_lvl)
 	printf("Starting %d dlist-operational tests.\n", SZ - START);
 	for (int i = START; i < SZ; i ++)
 	{
-		if ((debug_lvl & OP_TEST_BORDER) > 0)
+		if ((CUR_DEBUG & OP_TEST_BORDER) > 0)
 			printf("\n################################################################\n\n");
-		if ((debug_lvl & OP_TEST_NUMBERS) > 0)
+		if ((CUR_DEBUG & OP_TEST_NUMBERS) > 0)
 			printf("test #%i\n", i);
 		a = ft_dlist_generate(t[i].a, 0);
 		b = ft_dlist_generate(t[i].b, 0);
-		if ((debug_lvl & OP_TEST_FULLDETAILS) > 0)
+		if ((CUR_DEBUG & OP_TEST_FULLDETAILS) > 0)
 		{
 			printf("ORIGINAL:\n");
-			assert(print(a, b, debug_lvl, sprinter) == 0);
+			assert(print(a, b, sprinter) == 0);
 		}
 		int op = t[i].opsz;
 		while (op --)
@@ -108,37 +108,37 @@ void	op_tests(int debug_lvl)
 			switch (t[i].ops[op])
 			{
 				case PA:
-					op_pa(&a, &b, debug_lvl);
+					op_pa(&a, &b);
 					break;
 				case PB:
-					op_pb(&a, &b, debug_lvl);
+					op_pb(&a, &b);
 					break;
 				case RA:
-					op_ra(&a, debug_lvl);
+					op_ra(&a);
 					break;
 				case RB:
-					op_rb(&b, debug_lvl);
+					op_rb(&b);
 					break;
 				case RR:
-					op_rr(&a, &b, debug_lvl);
+					op_rr(&a, &b);
 					break;
 				case SA:
-					op_sa(&a, debug_lvl);
+					op_sa(&a);
 					break;
 				case SB:
-					op_sb(&b, debug_lvl);
+					op_sb(&b);
 					break;
 				case SS:
-					op_ss(&a, &b, debug_lvl);
+					op_ss(&a, &b);
 					break;
 				case RRA:
-					op_rra(&a, debug_lvl);
+					op_rra(&a);
 					break;
 				case RRB:
-					op_rrb(&b, debug_lvl);
+					op_rrb(&b);
 					break;
 				case RRR:
-					op_rrr(&a, &b, debug_lvl);
+					op_rrr(&a, &b);
 					break;
 				default:
 					printf("Operation not recognized\n");
@@ -151,16 +151,16 @@ void	op_tests(int debug_lvl)
 		t_dlist *expb = ft_dlist_generate(t[i].expb, 0);
 		int expsza = ft_dlist_size(expa);
 		int expszb = ft_dlist_size(expb);
-		if ((debug_lvl & OP_TEST_DETAILS) > 0)
+		if ((CUR_DEBUG & OP_TEST_DETAILS) > 0)
 			printf("a: %i nodes (expected %i), b: %i nodes (expected %i)\n", nsza, expsza, nszb, expszb);
 		int wronga = ft_dlist_ncmp_str(a, expa, expsza + 1) != 0;
 		int wrongb = ft_dlist_ncmp_str(b, expb, expszb + 1) != 0;
-		if ((debug_lvl & OP_TEST_FULLDETAILS) > 0 && (wronga || wrongb || (debug_lvl & OP_TEST_FULLDETAILS_SUCCESS) > 0))
+		if ((CUR_DEBUG & OP_TEST_FULLDETAILS) > 0 && (wronga || wrongb || (CUR_DEBUG & OP_TEST_FULLDETAILS_SUCCESS) > 0))
 		{
 			printf("EXPECTED:\n");
-			assert(print(expa, expb, debug_lvl, sprinter) == 0);
+			assert(print(expa, expb, sprinter) == 0);
 			printf("ACTUAL:\n");
-			assert(print(a, b, debug_lvl, sprinter) == 0);
+			assert(print(a, b, sprinter) == 0);
 		}
 		assert(!wronga && !wrongb);
 		ft_dlist_clear(&a, free, 0);

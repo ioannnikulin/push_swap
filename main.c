@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 20:17:47 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 22:26:08 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,8 @@ int	main(int argc, char **argv)
 	a = 0;
 	b = 0;
 	if (argc == 1 || !parse_params(&a, argc, argv))
-	{
-		ft_fprintf(2, "Error\n");
-		return (0);
-	}
-	ft_printf("%i\n", CUR_DEBUG);
-	print(a, b, CUR_DEBUG, iprinter);
-	sort(&a, &b, CUR_DEBUG);
+		return (error(0, 0, 0, 0));
+	print(a, b, iprinter);
+	sort(&a, &b);
 	return (0);
 }

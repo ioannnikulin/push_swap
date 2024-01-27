@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:16:17 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 20:27:29 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 22:02:44 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ int		ft_dlist_print(t_dlist *lst, int debug_lvl, char *delim,
 // negative if first list is smaller
 int		ft_dlist_ncmp(t_dlist *a, t_dlist *b, int n, int (*cmp)(void *, void *));
 int		ft_dlist_ncmp_str(t_dlist *a, t_dlist *b, int n);
+int		ft_dlist_ncmp_i(t_dlist *a, t_dlist *b, int n);
+int		ft_voidptr_strcmp(void *a, void *b);
+int		ft_voidptr_icmp(void *a, void *b);
 // -------- printf --------
 int		ft_printf(const char *s, ...);
 int		ft_fprintf(int fd, const char *s, ...);

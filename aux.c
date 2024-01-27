@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 19:22:57 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 22:19:35 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,13 @@ int	parse_params(t_dlist **a, int argc, char **argv)
 	(*a)->prev = ft_dlist_last(*a);
 	(*a)->prev->next = *a;
 	return (ft_dlist_size(*a));
+}
+
+int	error(int ret, t_dlist **a, t_dlist **b, int *prices)
+{
+	ft_dlist_clear(a, free, 0);
+	ft_dlist_clear(b, free, 0);
+	free(prices);
+	ft_fprintf(2, "Error\n");
+	return (ret);
 }
