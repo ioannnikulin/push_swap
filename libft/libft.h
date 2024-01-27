@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:16:17 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 19:28:03 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:27:29 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_list	*ft_list_map(t_list *lst, void *(*f)(void *), void (*del)(void *));
 # define NEXT 4
 # define ANGLES 8
 # define CHECK 16
+# define NEWLINE_BEFORE_CHECK 32
 
 typedef struct s_dlist
 {

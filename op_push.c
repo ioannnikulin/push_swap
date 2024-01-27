@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:50:38 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 19:37:53 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:50:59 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ static void	op_p(t_dlist **from, t_dlist **to, int debug_lvl)
 	a->prev = 0;
 	a->next = 0;
 	ft_dlist_add_front(to, a);
+	if (ft_dlist_size(*to) == 1)
+	{
+		a->prev = a;
+		a->next = a;
+	}
 }
 
 void	op_pa(t_dlist **a, t_dlist **b, int debug_lvl)

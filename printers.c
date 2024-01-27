@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 19:31:28 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:18:36 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	print(t_dlist *a, t_dlist *b, int debug_lvl, void (*p)(void *))
 		ft_printf("\nStack A:\n");
 	ret = ft_dlist_print(a, debug_lvl, delim, p);
 	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
-		ft_printf("--------\n");
+		ft_printf("\n--------\n");
 	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
 		ft_printf("\nStack B:\n");
 	ret = ret | ft_dlist_print(b, debug_lvl, delim, p);
 	if ((debug_lvl & STACK_HEADER_FOOTER) > 0)
-		ft_printf("--------\n");
+		ft_printf("\n--------\n");
 	if ((debug_lvl & BORDER_PRINTOUT) > 0)
 		ft_printf("\n================================");
 	ft_printf("\n");

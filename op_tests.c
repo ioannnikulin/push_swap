@@ -6,15 +6,15 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
-/*   Updated: 2024/01/27 19:35:29 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:55:25 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <assert.h>
 #include <stdio.h>
 #include "push_swap_internal.h"
-#define START 0 
-#define SZ 53
+#define START 0
+#define SZ 55
 
 typedef enum eOP {
 	PA, PB, SA, SB, SS, RA, RB, RR, RRA, RRB, RRR
@@ -86,6 +86,8 @@ void	op_tests(int debug_lvl)
 	t[50] = (t_testcase){{NULL}, {NULL}, {SS}, 1, {NULL}, {NULL}};
 	t[51] = (t_testcase){{"1", "2", NULL}, {NULL}, {PB}, 1, {"2", NULL}, {"1", NULL}};
 	t[52] = (t_testcase){{NULL}, {"1", "2", NULL}, {PA}, 1, {"1", NULL}, {"2", NULL}};
+	t[53] = (t_testcase){{"1", "2", NULL}, {NULL}, {PB, PB}, 2, {NULL}, {"2", "1", NULL}};
+	t[54] = (t_testcase){{NULL}, {"1", "2", NULL}, {PA, PA}, 2, {"2", "1", NULL}, {NULL}};
 	printf("Starting %d dlist-operational tests.\n", SZ - START);
 	for (int i = START; i < SZ; i ++)
 	{
@@ -153,7 +155,7 @@ void	op_tests(int debug_lvl)
 			printf("a: %i nodes (expected %i), b: %i nodes (expected %i)\n", nsza, expsza, nszb, expszb);
 		int wronga = ft_dlist_ncmp_str(a, expa, expsza + 1) != 0;
 		int wrongb = ft_dlist_ncmp_str(b, expb, expszb + 1) != 0;
-		if ((debug_lvl & OP_TEST_FULLDETAILS) > 0 && (wronga || wrongb))
+		if ((debug_lvl & OP_TEST_FULLDETAILS) > 0 && (wronga || wrongb || (debug_lvl & OP_TEST_FULLDETAILS_SUCCESS) > 0))
 		{
 			printf("EXPECTED:\n");
 			assert(print(expa, expb, debug_lvl, sprinter) == 0);

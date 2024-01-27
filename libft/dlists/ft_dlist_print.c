@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 19:21:05 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:27:48 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ static int	print_node_and_check(t_dlist *cur, int debug_lvl, void (*p)(void *))
 	return (ret);
 }
 
-static int	print_check(t_dlist *err)
+static int	print_check(t_dlist *err, int debug_lvl)
 {
+	if ((debug_lvl & NEWLINE_BEFORE_CHECK) > 0)
+		ft_printf("\n");
 	if (err)
 	{
 		ft_printf("First inconsistency in links found at object %p\n", err);
@@ -64,6 +66,6 @@ int	ft_dlist_print(t_dlist *lst, int debug_lvl, char *delim, void (*p)(void *))
 		cur = cur->next;
 	}
 	if ((debug_lvl & CHECK) > 0)
-		return (print_check(err));
+		return (print_check(err, debug_lvl));
 	return (0);
 }

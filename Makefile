@@ -3,7 +3,7 @@ NAME = push_swap
 CFLAGS = -Wall -Wextra -Werror
 
 FOLDER = .
-FILENAMES = aux.c op_swap.c op_push.c op_rot.c op_rrot.c printers.c
+FILENAMES = aux.c op_swap.c op_push.c op_rot.c op_rrot.c printers.c sorter.c
 SRCS = $(addprefix $(FOLDER)/, $(FILENAMES))
 OBJS = $(SRCS:.c=.o)
 INCLUDES = -I. -Ilibft
@@ -42,7 +42,7 @@ fclean: clean
 
 re: fclean all
 
-CALL = ./$(NAME) 12 "34 5555 -07" 0 9
+CALL = ./$(NAME) 5 2 7 1 6 3 9 4 8
 
 run:
 	$(PREFIX)echo $(CALL) | bash

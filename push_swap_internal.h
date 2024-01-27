@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 19:22:27 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:54:48 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include "libft/libft.h"
-# define OP_NAME 32
+# define OP_NAME 16384
 # define STACK_HEADER_FOOTER 128
 # define NEWLINE_BETWEEN_ELEMENTS 256
 # define BORDER_PRINTOUT 512
@@ -23,8 +23,11 @@
 # define OP_TEST_DETAILS 2048
 # define OP_TEST_FULLDETAILS 4096
 # define OP_TEST_BORDER 8192
-# define MAX_DEBUG 16383
+# define OP_TEST_FULLDETAILS_SUCCESS 32768
+# define MAX_DEBUG 65535
+# define MANUAL_OPS 128 + 16 + 32
 
+int		sort(t_dlist **a, t_dlist **b, int debug_lvl);
 int		print(t_dlist *a, t_dlist *b, int debug_lvl, void (*p)(void *));
 void	sprinter(void *content);
 void	iprinter(void *content);
