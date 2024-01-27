@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 19:21:29 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:13:25 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	print_node_and_check(t_dlist *cur, int mode)
 		ft_printf("(%p) ", cur->prev);
 	if ((mode & ADDR) > 0)
 		ft_printf("[%p] ", cur);
-	ft_printf("%i", *(int *)(cur->content));
+	ft_printf("%s", (char *)(cur->content));
 	if ((mode & NEXT) > 0)
 		ft_printf(" (%p)", cur->next);
 	if ((mode & ANGLES) > 0)

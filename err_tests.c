@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/23 20:52:57 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 14:43:23 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-//#define DEBUG
+#include "push_swap_internal.h"
 #define START 0
 #define SZ 11
 
-void	errors(void)
+void	errors(int cur_debug)
 {
 	int		fs, rd;
 	char	rdbuf[30];
@@ -42,9 +42,8 @@ void	errors(void)
 	printf("Starting %d erroneous tests.\n", SZ);
 	for (int i = START; i < SZ; i ++)
 	{
-#ifdef DEBUG
-		printf("%i\n", i);
-#endif
+		if ((cur_debug & OP_TEST_NUMBERS) > 0)
+			printf("%i\n", i);
 		remove("stdout.txt");
 		remove("stderr.txt");
 		bzero(callbuf, 127);
@@ -56,9 +55,8 @@ void	errors(void)
 		fs = open("stderr.txt", O_RDONLY, 0600);
 		assert(fs);
 		rd = read(fs, &rdbuf, 30);
-#ifdef DEBUG
-		printf("%i %lu\n", rd, strlen(err));
-#endif
+		if ((cur_debug & OP_TEST_DETAILS) > 0)
+			printf("%i %lu\n", rd, strlen(err));
 		assert(rd == (int)strlen(err));
 		assert(strncmp(rdbuf, err, rd) == 0);
 		close(fs);

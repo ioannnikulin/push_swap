@@ -3,10 +3,15 @@ NAME = push_swap
 CFLAGS = -Wall -Wextra -Werror
 
 FOLDER = .
-FILENAMES = main.c op_swap.c op_push.c op_rot.c op_rrot.c
+FILENAMES = aux.c op_swap.c op_push.c op_rot.c op_rrot.c
 SRCS = $(addprefix $(FOLDER)/, $(FILENAMES))
 OBJS = $(SRCS:.c=.o)
 INCLUDES = -I. -Ilibft
+
+MAINFOLDER = .
+MAINFILENAME = main.c
+MAINSRC = $(addprefix $(MAINFOLDER)/, $(MAINFILENAME))
+MAINOBJ = $(MAINSRC:.c=.o)
 
 all: $(NAME)
 
@@ -15,15 +20,18 @@ libft:
 
 $(NAME): libft endpoint
 
-endpoint: $(OBJS) # TODO: remove this before submission, it causes relinking
-	$(CC) -o $(NAME) $(OBJS) -Llibft -lft
+endpoint: $(OBJS) $(MAINOBJ)# TODO: remake all this before submission, it causes relinking
+	$(CC) -o $(NAME) $(OBJS) $(MAINOBJ) -Llibft -lft
 
 $(OBJS): %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
 
+$(MAINOBJ): %.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
+
 clean:
 	cd libft && make clean
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(MAINOBJ)
 
 fclean: clean
 	cd libft && make fclean
@@ -40,15 +48,17 @@ debug:
 	gdbtui --args $(CALL:'=)
 
 TESTF = .
-TEST_NAMES = tests.c
+TEST_NAMES = op_tests.c err_tests.c main_test.c
 TEST_SRCS = $(addprefix $(TESTF)/, $(TEST_NAMES))
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 
 $(TEST_OBJS): %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
 
-errors: $(NAME) $(TEST_OBJS)
-	$(CC) -o $@ $(TEST_OBJS)
-	./$@
+tests: libft $(TEST_OBJS) $(OBJS) endpoint
+	$(CC) -o $@ $(TEST_OBJS) $(OBJS) -Llibft -lft
+
+testfclean: fclean
+	rm -f $(TEST_OBJS) tests
 
 .PHONY: all clean fclean re test libft

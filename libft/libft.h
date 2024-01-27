@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:16:17 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 19:21:17 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 13:41:16 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int		ft_dlist_clear(t_dlist **lst, void (*del)(void *), int ret);
 void	ft_dlist_iter(t_dlist *lst, void (*f)(void *));
 t_dlist	*ft_dlist_map(t_dlist *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_dlist_print(t_dlist *lst, int mode, char *delim);
+int		ft_dlist_ncmp(t_dlist *a, t_dlist *b, int n, int (*cmp)(void *, void *));
+int		ft_dlist_ncmp_str(t_dlist *a, t_dlist *b, int n);
 // -------- printf --------
 int		ft_printf(const char *s, ...);
 int		ft_fprintf(int fd, const char *s, ...);

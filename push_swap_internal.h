@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/20 19:57:57 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 14:51:34 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 # define STACK_HEADER_FOOTER 128
 # define NEWLINE_BETWEEN_ELEMENTS 256
 # define BORDER_PRINTOUT 512
-# define MAX_DEBUG 1023
+# define OP_TEST_NUMBERS 1024
+# define OP_TEST_DETAILS 2048
+# define OP_TEST_FULLDETAILS 4096
+# define MAX_DEBUG 8191
 
 void	print(t_dlist *a, t_dlist *b, int debug_lvl);
 void	op_sa(t_dlist **a, int debug_lvl);
