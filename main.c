@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 14:19:31 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:26:33 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	main(int argc, char **argv)
 		ft_fprintf(2, "Error\n");
 		return (0);
 	}
-	print(a, b, 0);
-	op_sa(&a, 0);
-	print(a, b, 0);
-	op_pb(&a, &b, 0);
-	print(a, b, 0);
+	print(a, b, CUR_DEBUG, iprinter);
+	op_sa(&a, CUR_DEBUG);
+	print(a, b, CUR_DEBUG, iprinter);
+	op_pb(&a, &b, CUR_DEBUG);
+	print(a, b, CUR_DEBUG, iprinter);
 
 	//sort(&a, &b);
 	return (0);

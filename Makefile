@@ -3,7 +3,7 @@ NAME = push_swap
 CFLAGS = -Wall -Wextra -Werror
 
 FOLDER = .
-FILENAMES = aux.c op_swap.c op_push.c op_rot.c op_rrot.c
+FILENAMES = aux.c op_swap.c op_push.c op_rot.c op_rrot.c printers.c
 SRCS = $(addprefix $(FOLDER)/, $(FILENAMES))
 OBJS = $(SRCS:.c=.o)
 INCLUDES = -I. -Ilibft
@@ -20,7 +20,9 @@ libft:
 	$(PREFIX)cd libft && make re
 
 $(NAME): libft endpoint
-	# TODO remove tests folder from libft, it has stdio::printf!
+
+# TODO remove tests folder from libft, it has stdio::printf!
+
 endpoint: $(OBJS) $(MAINOBJ)# TODO: remake all this before submission, it causes relinking
 	$(PREFIX)$(CC) -o $(NAME) $(OBJS) $(MAINOBJ) -Llibft -lft
 

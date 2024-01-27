@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
-/*   Updated: 2024/01/27 18:35:49 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:35:29 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "push_swap_internal.h"
 #define START 0 
-#define SZ 51
+#define SZ 53
 
 typedef enum eOP {
 	PA, PB, SA, SB, SS, RA, RB, RR, RRA, RRB, RRR
@@ -84,6 +84,8 @@ void	op_tests(int debug_lvl)
 	t[48] = (t_testcase){{NULL}, {"4", "5", "6", "7", NULL}, {SS}, 1, {NULL}, {"5", "4", "6", "7", NULL}};
 	t[49] = (t_testcase){{"1", NULL}, {"4", NULL}, {SS}, 1, {"1", NULL}, {"4", NULL}};
 	t[50] = (t_testcase){{NULL}, {NULL}, {SS}, 1, {NULL}, {NULL}};
+	t[51] = (t_testcase){{"1", "2", NULL}, {NULL}, {PB}, 1, {"2", NULL}, {"1", NULL}};
+	t[52] = (t_testcase){{NULL}, {"1", "2", NULL}, {PA}, 1, {"1", NULL}, {"2", NULL}};
 	printf("Starting %d dlist-operational tests.\n", SZ - START);
 	for (int i = START; i < SZ; i ++)
 	{
@@ -96,7 +98,7 @@ void	op_tests(int debug_lvl)
 		if ((debug_lvl & OP_TEST_FULLDETAILS) > 0)
 		{
 			printf("ORIGINAL:\n");
-			assert(print(a, b, debug_lvl) == 0);
+			assert(print(a, b, debug_lvl, sprinter) == 0);
 		}
 		int op = t[i].opsz;
 		while (op --)
@@ -154,9 +156,9 @@ void	op_tests(int debug_lvl)
 		if ((debug_lvl & OP_TEST_FULLDETAILS) > 0 && (wronga || wrongb))
 		{
 			printf("EXPECTED:\n");
-			assert(print(expa, expb, debug_lvl) == 0);
+			assert(print(expa, expb, debug_lvl, sprinter) == 0);
 			printf("ACTUAL:\n");
-			assert(print(a, b, debug_lvl) == 0);
+			assert(print(a, b, debug_lvl, sprinter) == 0);
 		}
 		assert(!wronga && !wrongb);
 		ft_dlist_clear(&a, free, 0);
