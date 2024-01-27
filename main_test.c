@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlist_add_front.c                               :+:      :+:    :+:   */
+/*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/23 20:40:02 by inikulin         ###   ########.fr       */
+/*   Created: 2024/01/20 17:27:18 by inikulin          #+#    #+#             */
+/*   Updated: 2024/01/23 20:54:25 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include <stdio.h>
+//#define DEBUG
 
-void	ft_dlist_add_front(t_dlist **lst, t_dlist *new)
+int	errors(void);
+int op_tests(void);
+
+int	main(void)
 {
-	if (!(*lst))
-	{
-		*lst = new;
-		return ;
-	}
-	new->next = *lst;
-	new->prev = (*lst)->prev;
-	new->prev->next = new;
-	new->next->prev = new;
-	*lst = new;
+	errors();
+	op_tests();
+	return (0);
 }

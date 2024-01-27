@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   err_tests.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/23 20:51:39 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:52:57 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 #include <stdio.h>
 #include <string.h>
 //#define DEBUG
-#define ERR_START 0
-#define ERR_SZ 11
+#define START 0
+#define SZ 11
 
 void	errors(void)
 {
 	int		fs, rd;
 	char	rdbuf[30];
 	char	callbuf[127];
-	char args[ERR_SZ][30] = {
+	char args[SZ][30] = {
 		"1 2 2147483648 3 4"
 		, "1 2 -2147483649 3 4"
 		, ""
@@ -39,8 +39,8 @@ void	errors(void)
 		, "1 \"2 3 4\" --1"
 	};
 	char err[] = "Error\n";
-	printf("Starting %d erroneous tests.\n", ERR_SZ);
-	for (int i = ERR_START; i < ERR_SZ; i ++)
+	printf("Starting %d erroneous tests.\n", SZ);
+	for (int i = START; i < SZ; i ++)
 	{
 #ifdef DEBUG
 		printf("%i\n", i);
@@ -66,15 +66,4 @@ void	errors(void)
 	remove("stdout.txt");
 	remove("stderr.txt");
 	printf("SUCCESS: the program failed on all erroneous input\n");
-}
-
-#include "push_swap_internal.h"
-#define CUR_DEBUG MAX_DEBUG
-
-void 
-
-int	main(void)
-{
-	errors();
-	return (0);
 }

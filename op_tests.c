@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   op_tests.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 17:27:18 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/23 20:51:39 by inikulin         ###   ########.fr       */
+/*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
+/*   Updated: 2024/01/26 19:19:36 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,45 +17,45 @@
 #include <stdio.h>
 #include <string.h>
 //#define DEBUG
-#define ERR_START 0
-#define ERR_SZ 11
+#define START 0
+#define SZ 1
+
+typedef struct s_testcase {
+	char	*a[10];
+	int sza;
+	char	*b[10];
+	int szb;
+	OP	ops[10];
+	int opsz;
+	char	*resa[10];
+	int rsza;
+	char	*resb[10];
+	int rszb;
+}	t_testcase;
+
+enum OP {
+	PA, PB, SA, SB, SS, RA, RB, RR, RRA, RRB, RRR
+};
 
 void	errors(void)
 {
-	int		fs, rd;
-	char	rdbuf[30];
-	char	callbuf[127];
-	char args[ERR_SZ][30] = {
-		"1 2 2147483648 3 4"
-		, "1 2 -2147483649 3 4"
-		, ""
-		, "1 2 3 1 4"
-		, "1 2 i 3 4"
-		, "1 2 *3 4"
-		, "1 2 1+1 4"
-		, "--"
-		, "1 +"
-		, "1 \"2 3 4\" 3"
-		, "1 \"2 3 4\" --1"
-	};
-	char err[] = "Error\n";
-	printf("Starting %d erroneous tests.\n", ERR_SZ);
-	for (int i = ERR_START; i < ERR_SZ; i ++)
+	t_dlist *a, *b;
+	int op;
+	t_testcase t[SZ];
+	t[0] = (t_testcase){{"1", "2", "3"}, 3, {"4", "5", "6", "7"}, 4, {PB}, 1, {"2", "3"}, 2, {"3", "4", "5", "6", "7"}, 5};
+	printf("Starting %d tests.\n", SZ);
+	for (int i = START; i < SZ; i ++)
 	{
 #ifdef DEBUG
 		printf("%i\n", i);
 #endif
-		remove("stdout.txt");
-		remove("stderr.txt");
-		bzero(callbuf, 127);
-		strcat(strcat(strcat(callbuf, "./push_swap "), args[i]), " > stdout.txt 2> stderr.txt");
-		system(callbuf);
-		fs = open("stdout.txt", O_RDONLY, 0600);
-		assert(fs && read(fs, &rdbuf, 30) == 0);
-		close(fs);
-		fs = open("stderr.txt", O_RDONLY, 0600);
-		assert(fs);
-		rd = read(fs, &rdbuf, 30);
+		a = ft_dlist_generate(t[i].a, 0);
+		b = ft_dlist_generate(t[i].b, 0);
+		op = t[i].opsz;
+		while (op --)
+		{
+
+		}
 #ifdef DEBUG
 		printf("%i %lu\n", rd, strlen(err));
 #endif

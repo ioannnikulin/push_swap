@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/21 17:34:13 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:41:53 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_dlist	*connect_tail( \
 	if (!loop_to)
 		return (*res);
 	if (loop_to != orig)
-		return ((t_dlist *)ft_dlist_clear(res, d, 0));
+		return ((t_dlist *)(unsigned long long)ft_dlist_clear(res, d, 0));
 	res_tail->next = *res;
 	(*res)->prev = res_tail;
 	return (*res);
@@ -69,5 +69,5 @@ t_dlist	*ft_dlist_map(t_dlist *lst, void *(*f)(void *), void (*del)(void*))
 		iter_orig = iter_orig->next;
 		iter_res = iter_res->next;
 	}
-	return (connect_tail(&res, ft_dlist_last(res), lst));
+	return (connect_tail(&res, ft_dlist_last(res), lst, del));
 }

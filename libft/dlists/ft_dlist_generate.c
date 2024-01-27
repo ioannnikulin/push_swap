@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/21 17:14:30 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:40:28 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	make_worm(t_dlist **root, char *texts[])
 t_dlist	*ft_dlist_generate(char *texts[], int end_to)
 {
 	t_dlist	*root;
-	t_dlist	*curnode;
 	t_dlist	*tail;
 	int		idx;
 
