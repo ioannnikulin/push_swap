@@ -42,7 +42,7 @@ fclean: clean
 
 re: fclean all
 
-CALL = ./$(NAME) 5 2 7 1 6 3 9 4 8
+CALL = ./$(NAME) 1 2 2147483648 3 4
 
 run:
 	$(PREFIX)echo $(CALL) | bash

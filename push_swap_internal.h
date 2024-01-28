@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 22:16:04 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:26:31 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define OP_TEST_FULLDETAILS_SUCCESS 32768
 # define MAX_DEBUG 65535
 # define MANUAL_OPS 128 + 16 + 32
-# define CUR_DEBUG MANUAL_OPS
+# define CUR_DEBUG 32
 
 int		sort(t_dlist **a, t_dlist **b);
 int		print(t_dlist *a, t_dlist *b, void (*p)(void *));

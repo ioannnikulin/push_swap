@@ -6,12 +6,11 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 22:26:08 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/28 13:57:18 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_internal.h"
-#define CUR_DEBUG MANUAL_OPS
 
 int	parse_params(t_dlist **a, int argc, char **argv);
 
