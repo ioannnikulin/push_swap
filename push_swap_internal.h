@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/28 14:26:31 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:41:52 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,13 @@
 # define MANUAL_OPS 128 + 16 + 32
 # define CUR_DEBUG 32
 
+typedef enum e_OP
+{
+	PA, PB, SA, SB, SS, RA, RB, RR, RRA, RRB, RRR
+}	t_OP;
+
 int		sort(t_dlist **a, t_dlist **b);
+int		sorted(t_dlist *root);
 int		print(t_dlist *a, t_dlist *b, void (*p)(void *));
 void	sprinter(void *content);
 void	iprinter(void *content);
@@ -43,5 +49,6 @@ void	op_rr(t_dlist **a, t_dlist **b);
 void	op_rra(t_dlist **a);
 void	op_rrb(t_dlist **b);
 void	op_rrr(t_dlist **a, t_dlist **b);
+void	apply(t_dlist **a, t_dlist **b, t_OP op);
 int		error(int ret, t_dlist **a, t_dlist **b, int *prices);
 #endif
