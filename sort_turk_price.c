@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 18:53:08 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/10 20:14:08 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	calc_rbs(t_turk_params *p, t_turk_rots *rs)
 	int		junjabcmp;
 
 	justunder = *(p->b);
+	rs->rbs = 0;
 	while (1)
 	{
 		juncmp = ft_voidptr_icmp(rs->obj->content, justunder->content);
@@ -53,7 +54,9 @@ static void	calc_rbs(t_turk_params *p, t_turk_rots *rs)
 		junjabcmp = ft_voidptr_icmp(justunder->content, justunder->prev->content);
 		if (juncmp < 0 && jabcmp > 0 && junjabcmp > 0)
 			return ;
-		if (juncmp > 0 && (jabcmp < 0 || (jabcmp > 0 && junjabcmp > 0)))
+		if (juncmp > 0 && jabcmp < 0 && junjabcmp > 0)
+			return ;
+		if (juncmp > 0 && jabcmp > 0 && junjabcmp < 0)
 			return ;
 		justunder = justunder->next;
 		rs->rbs ++;
@@ -63,8 +66,8 @@ static void	calc_rbs(t_turk_params *p, t_turk_rots *rs)
 static void	calc_price(t_turk_params *p, int c, t_turk_rots *rs)
 {
 	rs->ras = c;
-	rs->rras = p->asz - rs->ras;
-	rs->rrbs = p->bsz - rs->rbs;
+	rs->rras = p->asz - rs->ras - (p->asz == 1);
+	rs->rrbs = p->bsz - rs->rbs - (p->bsz == 1);
 	rs->rrs = *ft_min_int(&(rs->ras), &(rs->rbs));
 	rs->ras -= rs->rrs;
 	rs->rbs -= rs->rrs;
