@@ -16,7 +16,7 @@ MEM_NAMES = ft_bzero.c ft_calloc.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmov
 MEM_SRCS = $(addprefix $(MEM_F)/, $(MEM_NAMES))
 
 NUM_F = numbers
-NUM_NAMES = ft_atoi.c ft_itoa.c ft_xtoa_base.c
+NUM_NAMES = ft_atoi.c ft_itoa.c ft_xtoa_base.c ft_minmax_int.c
 NUM_SRCS = $(addprefix $(NUM_F)/, $(NUM_NAMES))
 
 STR_F = strings
