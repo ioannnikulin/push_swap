@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minmax.c                                        :+:      :+:    :+:   */
+/*   ft_minmax_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:28:56 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 14:38:54 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/10 16:21:02 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	*ft_min_int_va(int sz, ...)
 	va_list	args;
 
 	va_start(args, sz);
-	res = va_arg(args, (int *));
+	res = va_arg(args, int *);
 	while (-- sz)
 	{
-		cur = va_arg(args, (int *));
+		cur = va_arg(args, int *);
 		if (*cur < *res)
 			res = cur;
 	}
@@ -51,10 +51,10 @@ int	*ft_max_int_va(int sz, ...)
 	va_list	args;
 
 	va_start(args, sz);
-	res = va_arg(args, (int *));
+	res = va_arg(args, int *);
 	while (-- sz)
 	{
-		cur = va_arg(args, (int *));
+		cur = va_arg(args, int *);
 		if (*cur > *res)
 			res = cur;
 	}

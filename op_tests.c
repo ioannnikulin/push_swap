@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
-/*   Updated: 2024/01/27 21:36:17 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:14:08 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@
 #define START 0
 #define SZ 55
 
-typedef enum eOP {
-	PA, PB, SA, SB, SS, RA, RB, RR, RRA, RRB, RRR
-}	OP;
-
 typedef struct s_testcase {
 	char	*a[10];
 	char	*b[10];
-	OP	ops[10];
+	t_OP	ops[10];
 	int opsz;
 	char	*expa[10];
 	char	*expb[10];

@@ -5,3 +5,4 @@ libft/tests/*
 errors
 *.txt
 tests
+*.d

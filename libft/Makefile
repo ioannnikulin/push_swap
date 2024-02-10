@@ -1,14 +1,14 @@
 CC = cc
 NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
-PREFIX = @
+FTPREFIX = @
 
 LIST_F = lists
 LIST_NAMES = ft_list_add_back.c ft_list_add_front.c ft_list_clear.c ft_list_delone.c ft_list_iter.c ft_list_generate.c ft_list_last.c ft_list_new.c ft_list_size.c ft_list_map.c
 LIST_SRCS = $(addprefix $(LIST_F)/, $(LIST_NAMES))
 
 DLIST_F = dlists
-DLIST_NAMES = ft_dlist_add_back.c ft_dlist_add_front.c ft_dlist_clear.c ft_dlist_delone.c ft_dlist_iter.c ft_dlist_generate.c ft_dlist_last.c ft_dlist_new.c ft_dlist_size.c ft_dlist_map.c ft_dlist_print.c ft_dlist_ncmp.c
+DLIST_NAMES = ft_dlist_add_back.c ft_dlist_add_front.c ft_dlist_clear.c ft_dlist_delone.c ft_dlist_iter.c ft_dlist_generate.c ft_dlist_generate_int.c ft_dlist_last.c ft_dlist_new.c ft_dlist_size.c ft_dlist_map.c ft_dlist_print.c ft_dlist_ncmp.c
 DLIST_SRCS = $(addprefix $(DLIST_F)/, $(DLIST_NAMES))
 
 MEM_F = memory
@@ -40,16 +40,16 @@ PACK = ar rcs
 all: $(NAME)
 
 $(NAME): clean $(OBJS) 
-	$(PREFIX)$(PACK) $(NAME) $(OBJS)
+	$(FTPREFIX)$(PACK) $(NAME) $(OBJS)
 
 $(OBJS): %.o: %.c
-	$(PREFIX)$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
+	$(FTPREFIX)$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
 
 clean:
-	$(PREFIX)rm -f $(OBJS)
+	$(FTPREFIX)rm -f $(OBJS)
 
 fclean: clean
-	$(PREFIX)rm -f $(NAME)
+	$(FTPREFIX)rm -f $(NAME)
 
 re: fclean all
 
@@ -73,34 +73,34 @@ SEGFAULTOBJS = $(SEGFAULTS:.c=.o)
 SEGFAULTNAMES = $(SEGFAULTS:.c=.sf)
 
 $(TESTOBJS): %.o: %.c
-	$(PREFIX)$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
+	$(FTPREFIX)$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
 
 $(SEGFAULTOBJS): %.o: %.c
-	$(PREFIX)$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
+	$(FTPREFIX)$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
 
 $(AUXOBJ): %.o: %.c
-	$(PREFIX)$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
+	$(FTPREFIX)$(CC) -Werror -c $< -o $@ $(TESTINCLUDES) -g
 
 testfclean:
-	$(PREFIX)rm -f $(TESTOBJS)
-	$(PREFIX)rm -f $(SEGFAULTOBJS)
-	$(PREFIX)rm -f $(TESTNAME)
-	$(PREFIX)rm -f $(SEGFAULTNAMES)
+	$(FTPREFIX)rm -f $(TESTOBJS)
+	$(FTPREFIX)rm -f $(SEGFAULTOBJS)
+	$(FTPREFIX)rm -f $(TESTNAME)
+	$(FTPREFIX)rm -f $(SEGFAULTNAMES)
 
 goodtests: $(TESTOBJS) $(AUXOBJ)
-	$(PREFIX)$(CC) $^ $(TESTFLAGS) $(TESTINCLUDES) -o $(TESTNAME) -g
+	$(FTPREFIX)$(CC) $^ $(TESTFLAGS) $(TESTINCLUDES) -o $(TESTNAME) -g
 
 $(SEGFAULTNAMES): %.sf: %.o $(AUXOBJ)
-	$(PREFIX)$(CC) $^ $(TESTFLAGS) $(TESTINCLUDES) -o $@ -g
+	$(FTPREFIX)$(CC) $^ $(TESTFLAGS) $(TESTINCLUDES) -o $@ -g
 
 test: $(SEGFAULTNAMES) goodtests
 
 retest: testfclean test
 
 go: re retest
-	$(PREFIX)tests/test
-	$(PREFIX)rm -rf tmp.tst
+	$(FTPREFIX)tests/test
+	$(FTPREFIX)rm -rf tmp.tst
 	# -------- Multiple segfaults expected, which is part of the testing. --------
 	# -------- Stay calm unless you see an error message in UPPER CASE. --------
-	$(PREFIX)$(SEGFAULTNAMES:%.sf=%.sf ||) true
+	$(FTPREFIX)$(SEGFAULTNAMES:%.sf=%.sf ||) true
 	# -------- Testing finished. --------

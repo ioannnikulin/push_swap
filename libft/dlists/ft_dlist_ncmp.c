@@ -6,11 +6,12 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:41:58 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 22:19:19 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:45:21 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
+#include <stdint.h>
 
 int	ft_voidptr_strcmp(void *a, void *b)
 {
@@ -19,10 +20,10 @@ int	ft_voidptr_strcmp(void *a, void *b)
 
 int	ft_voidptr_icmp(void *a, void *b)
 {
-	if (*(int *)a > *(int *)b)
+	if ((int)(intptr_t)a > (int)(intptr_t)b)
 		return (1);
-	if (*(int *)a < *(int *)b)
-		return (1);
+	if ((int)(intptr_t)a < (int)(intptr_t)b)
+		return (-1);
 	return (0);
 }
 

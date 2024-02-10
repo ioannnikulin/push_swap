@@ -1,18 +1,20 @@
 CC = cc
 NAME = push_swap
 CFLAGS = -Wall -Wextra -Werror
-
-FOLDER = .
-FILENAMES = aux.c op_swap.c op_push.c op_rot.c op_rrot.c printers.c sorter.c
-SRCS = $(addprefix $(FOLDER)/, $(FILENAMES))
-OBJS = $(SRCS:.c=.o)
+PREFIX =
 INCLUDES = -I. -Ilibft
 
-MAINFOLDER = .
-MAINFILENAME = main.c
-MAINSRC = $(addprefix $(MAINFOLDER)/, $(MAINFILENAME))
-MAINOBJ = $(MAINSRC:.c=.o)
-PREFIX = @
+FOLDER = .
+
+FILENAMES = aux.c op_swap.c op_push.c op_rot.c op_rrot.c printers.c sort_turk_price.c# sorter.c
+SRCS = $(addprefix $(FOLDER)/, $(FILENAMES))
+OBJS = $(SRCS:.c=.o)
+DEPENDS = $(SRCS:.c=.d)
+
+ENDPOINT_FILENAMES = main.c
+ENDPOINT_SRCS = $(addprefix $(FOLDER)/, $(ENDPOINT_FILENAMES))
+ENDPOINT_OBJS = $(ENDPOINT_SRCS:.c=.o)
+ENDPOINT_DEPENDS = $(SRCS:.c=.d)
 
 all: $(NAME)
 
@@ -23,18 +25,20 @@ $(NAME): libft endpoint
 
 # TODO remove tests folder from libft, it has stdio::printf!
 
-endpoint: $(OBJS) $(MAINOBJ)# TODO: remake all this before submission, it causes relinking
-	$(PREFIX)$(CC) -o $(NAME) $(OBJS) $(MAINOBJ) -Llibft -lft
+endpoint: $(OBJS) $(ENDPOINT_OBJS)
+	$(PREFIX)$(CC) -o $(NAME) $(OBJS) $(ENDPOINT_OBJS) -Llibft -lft
+
+-include $(DEPENDS) $(ENDPOINT_DEPENDS)
 
 $(OBJS): %.o: %.c
-	$(PREFIX)$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
+	$(PREFIX)$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ $(INCLUDES) -g
 
-$(MAINOBJ): %.o: %.c
-	$(PREFIX)$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
+$(ENDPOINT_OBJS): %.o: %.c
+	$(PREFIX)$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ $(INCLUDES) -g
 
 clean:
 	$(PREFIX)cd libft && make clean
-	$(PREFIX)rm -f $(OBJS) $(MAINOBJ)
+	$(PREFIX)rm -f $(OBJS) $(ENDPOINT_OBJS) $(DEPENDS) $(ENDPOINT_DEPENDS)
 
 fclean: clean
 	$(PREFIX)cd libft && make fclean
@@ -42,16 +46,16 @@ fclean: clean
 
 re: fclean all
 
-CALL = ./$(NAME) 1 2 2147483648 3 4
+CALL = ./$(NAME) 1 2 2147483647 3 4
 
 run:
 	$(PREFIX)echo $(CALL) | bash
 
-debug: 
+debug:
 	$(PREFIX)@gdbtui --args $(CALL:'=)
 
 TESTF = .
-TEST_NAMES = op_tests.c err_tests.c main_test.c
+TEST_NAMES = op_tests.c err_tests.c main_test.c sort_turk_price_tests.c
 TEST_SRCS = $(addprefix $(TESTF)/, $(TEST_NAMES))
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 

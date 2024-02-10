@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:16:17 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 22:02:44 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:20:29 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ int		ft_atoi(const char *nptr);
 char	*ft_itoa(int v);
 size_t	ft_lltoa_base(long long nbr, char *base, char *buf);
 size_t	ft_ulltoa_base(unsigned long long nbr, char *base, char *buf);
+int		*ft_min_int(int *a, int *b);
+int		*ft_max_int(int *a, int *b);
+int		*ft_min_int_va(int sz, ...);
+int		*ft_max_int_va(int sz, ...);
 // -------- memory --------
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
@@ -87,6 +91,7 @@ typedef struct s_dlist
 }	t_dlist;
 t_dlist	*ft_dlist_new(void *content);
 t_dlist	*ft_dlist_generate(char	*texts[], int end_to);
+t_dlist	*ft_dlist_generate_int(int	nums[], int sz, int end_to);
 void	ft_dlist_add_front(t_dlist **lst, t_dlist *new);
 int		ft_dlist_size(t_dlist *lst);
 t_dlist	*ft_dlist_last(t_dlist *lst);

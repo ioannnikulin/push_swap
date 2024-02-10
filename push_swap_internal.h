@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 15:06:51 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/10 16:44:17 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <limits.h>
 # include <stdlib.h>
 # include "libft/libft.h"
-# define INT_MAX 2147483647
 # define OP_NAME 16384
 # define STACK_HEADER_FOOTER 128
 # define NEWLINE_BETWEEN_ELEMENTS 256
@@ -27,7 +26,7 @@
 # define OP_TEST_FULLDETAILS_SUCCESS 32768
 # define MAX_DEBUG 65535
 # define MANUAL_OPS 128 + 16 + 32
-# define CUR_DEBUG 32
+# define CUR_DEBUG MAX_DEBUG
 
 typedef enum e_OP
 {
