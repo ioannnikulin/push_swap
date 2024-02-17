@@ -11,7 +11,7 @@ SRCS = $(addprefix $(FOLDER)/, $(FILENAMES))
 OBJS = $(SRCS:.c=.o)
 DEPENDS = $(SRCS:.c=.d)
 
-ENDPOINT_FILENAMES = main.c
+ENDPOINT_FILENAMES = main.c sorter.c sort_manual.c
 ENDPOINT_SRCS = $(addprefix $(FOLDER)/, $(ENDPOINT_FILENAMES))
 ENDPOINT_OBJS = $(ENDPOINT_SRCS:.c=.o)
 ENDPOINT_DEPENDS = $(SRCS:.c=.d)

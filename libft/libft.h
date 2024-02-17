@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:16:17 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 18:20:29 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:31:14 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,6 @@ int		ft_voidptr_icmp(void *a, void *b);
 // -------- printf --------
 int		ft_printf(const char *s, ...);
 int		ft_fprintf(int fd, const char *s, ...);
+// -------- get_next_line --------
+char	*get_next_line(int fd);
 #endif

@@ -32,7 +32,11 @@ PRINTF_F = printf
 PRINTF_NAMES = aux_printf.c ft_printf.c pad_n_put.c put_c.c put_d.c put_percent.c put_s.c put_u.c put_x.c put_p.c
 PRINTF_SRCS = $(addprefix $(PRINTF_F)/, $(PRINTF_NAMES))
 
-SRCS = $(LIST_SRCS) $(DLIST_SRCS) $(MEM_SRCS) $(NUM_SRCS) $(STR_SRCS) $(SYM_SRCS) $(PRINTF_SRCS)
+GETNEXTLINE_F = get_next_line
+GETNEXTLINE_NAMES = get_next_line_bonus.c get_next_line_utils_bonus.c
+GETNEXTLINE_SRCS = $(addprefix $(GETNEXTLINE_F)/, $(GETNEXTLINE_NAMES))
+
+SRCS = $(LIST_SRCS) $(DLIST_SRCS) $(MEM_SRCS) $(NUM_SRCS) $(STR_SRCS) $(SYM_SRCS) $(PRINTF_SRCS) $(GETNEXTLINE_SRCS)
 OBJS = $(SRCS:.c=.o)
 INCLUDES = -I . 
 PACK = ar rcs
@@ -58,10 +62,11 @@ re: fclean all
 TESTF = tests
 TESTS = $(TESTF)/main_test.c $(TESTF)/ft_isalpha_test.c $(TESTF)/ft_isdigit_test.c $(TESTF)/ft_isalnum_test.c $(TESTF)/ft_isascii_test.c $(TESTF)/ft_isprint_test.c $(TESTF)/ft_strlen_test.c $(TESTF)/ft_memset_test.c $(TESTF)/ft_bzero_test.c $(TESTF)/ft_memcpy_test.c $(TESTF)/ft_memmove_test.c $(TESTF)/ft_strlcpy_test.c $(TESTF)/ft_strlcat_test.c $(TESTF)/ft_tolower_test.c $(TESTF)/ft_toupper_test.c $(TESTF)/ft_strchr_test.c $(TESTF)/ft_strrchr_test.c $(TESTF)/ft_strncmp_test.c $(TESTF)/ft_memchr_test.c $(TESTF)/ft_memcmp_test.c $(TESTF)/ft_strnstr_test.c $(TESTF)/ft_atoi_test.c $(TESTF)/ft_strdup_test.c $(TESTF)/ft_substr_test.c $(TESTF)/ft_strjoin_test.c $(TESTF)/ft_strtrim_test.c $(TESTF)/ft_split_test.c $(TESTF)/ft_itoa_test.c $(TESTF)/ft_striteri_test.c $(TESTF)/ft_strmapi_test.c
 NOTMYTESTS = $(TESTF)/ft_putchar_fd_test.c $(TESTF)/ft_putstr_fd_test.c $(TESTS)/ft_putendl_fd_test.c $(TESTF)/ft_putchar_fd_test.c $(TESTF)/ft_putstr_fd_test.c $(TESTF)/ft_putendl_fd_test.c $(TESTF)/ft_putnbr_fd_test.c
-JUSTMYTESTS = $(TESTF)/ft_lltoa_base_test.c $(TESTF)/ft_ulltoa_base_test.c $(TESTF)/ft_isspace_test.c $(TESTF)/ft_list_generate_test.c 
+JUSTMYTESTS = $(TESTF)/ft_lltoa_base_test.c $(TESTF)/ft_ulltoa_base_test.c $(TESTF)/ft_isspace_test.c $(TESTF)/ft_list_generate_test.c
 BONUSTESTS = $(TESTF)/ft_lstnew_test.c $(TESTF)/ft_lstadd_front_test.c $(TESTF)/ft_lstclear_test.c $(TESTF)/ft_lstsize_test.c $(TESTF)/ft_lstlast_test.c $(TESTF)/ft_lstadd_back_test.c $(TESTF)/ft_lstdelone_test.c $(TESTF)/ft_lstmap_test.c $(TESTF)/ft_lstiter_test.c
 PRINTFTESTS = $(TESTF)/ft_printf_test.c
-TESTOBJS = $(TESTS:.c=.o) $(JUSTMYTESTS:.c=.o) $(PRINTFTESTS:.c=.o)#$(BONUSTESTS:.c=.o) 
+GETNEXTLINETESTS = $(TESTF)/get_next_line_test.c
+TESTOBJS = $(TESTS:.c=.o) $(JUSTMYTESTS:.c=.o) $(PRINTFTESTS:.c=.o) $(BONUSTESTS:.c=.o) $(GETNEXTLINETESTS:.c=.o)
 TESTNAME = $(TESTF)/test
 TESTFLAGS = -L. -lft -lbsd
 TESTINCLUDES = -I $(TESTF)
@@ -100,6 +105,7 @@ retest: testfclean test
 go: re retest
 	$(FTPREFIX)tests/test
 	$(FTPREFIX)rm -rf tmp.tst
+	$(FTPREFIX)valgrind --leak-check=full --show-leak-kinds=all tests/test
 	# -------- Multiple segfaults expected, which is part of the testing. --------
 	# -------- Stay calm unless you see an error message in UPPER CASE. --------
 	$(FTPREFIX)$(SEGFAULTNAMES:%.sf=%.sf ||) true

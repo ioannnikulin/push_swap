@@ -6,16 +6,21 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 17:06:31 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/28 17:08:43 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/17 16:53:22 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap_internal.h"
+#include <stdio.h>
+#include <unistd.h>
 
 static void	go(t_dlist **a, t_dlist **b)
 {
 	char s[255];
 
 	ft_printf("> ");
-	scanf("%s", s); // TODO: replace scanf with gnl, split for function lengths
+	get_next_line(s); // TODO: replace scanf with gnl, split for function lengths
+	printf("\n[%s]\n", s);
 	if (ft_strncmp(s, "pa", 2) == 0)
 		op_pa(a, b);
 	else if (ft_strncmp(s, "pb", 2) == 0)
@@ -44,7 +49,10 @@ static void	go(t_dlist **a, t_dlist **b)
 
 void	sort_manual(t_dlist **a, t_dlist **b)
 {
-	while (1)
+	int	ops;
+
+	ops = 0;
+	while (ops ++ < 10)
 	{
 		go(a, b);
 		print(*a, *b, iprinter);

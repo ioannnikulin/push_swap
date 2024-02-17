@@ -6,3 +6,4 @@ errors
 *.txt
 tests
 *.d
+*.tmp
