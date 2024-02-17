@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 18:17:48 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/17 20:10:55 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ t_dlist	*ft_dlist_generate_int(int nums[], int sz, int end_to)
 		return (root);
 	tail = ft_dlist_last(root);
 	tail->next = root;
-	root->prev = tail;
+	tail->next->prev = tail;
 	return (root);
 }

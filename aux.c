@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 22:19:35 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:30:24 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static int	my_atoi(char **c, int *err)
 		curval = curval * 10 + *((*c)++) - '0';
 		*err = 0;
 		if ((sign > 0 && curval > INT_MAX) || (sign < 0 && -curval < INT_MIN))
+		{
 			(*err) = 1;
+			return (0);
+		}
 	}
 	if (**c != ' ' && **c != '\0')
 		(*err) = 1;
@@ -40,21 +43,16 @@ static int	my_atoi(char **c, int *err)
 
 static int	make_node(t_dlist **a, int curval)
 {
-	int		*content;
 	t_dlist	*cur;
 
 	cur = *a;
 	while (cur)
 	{
-		if (*(int *)cur->content == curval)
+		if ((int)(intptr_t)cur->content == curval)
 			return (1);
 		cur = cur->next;
 	}
-	content = malloc(sizeof(int));
-	if (!content)
-		return (1);
-	*content = curval;
-	ft_dlist_add_back(a, ft_dlist_new(content));
+	ft_dlist_add_back(a, ft_dlist_new((void *)(intptr_t)curval));
 	return (0);
 }
 
@@ -73,7 +71,7 @@ int	parse_params(t_dlist **a, int argc, char **argv)
 		{
 			curval = my_atoi(&(argv[curarg]), &err);
 			if (err || make_node(a, curval))
-				return (ft_dlist_clear(a, free, 0));
+				return (ft_dlist_clear(a, 0, 0));
 		}
 	}
 	(*a)->prev = ft_dlist_last(*a);

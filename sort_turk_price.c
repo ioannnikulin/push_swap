@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 20:14:08 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/17 21:03:34 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,18 @@ static void	rots_init(t_turk_rots *to, t_dlist *d)
 	to->rrbs = INT_MAX;
 	to->rrs = INT_MAX;
 	to->rrrs = INT_MAX;
-	to->direct_total = INT_MAX;
-	to->rev_total = INT_MAX;
+	to->total = INT_MAX;
 }
 
 static void	rots_copy(t_turk_rots from, t_turk_rots *to)
 {
-	to->obj = from.obj;
 	to->ras = from.ras;
 	to->rbs = from.rbs;
+	to->rrs = from.rrs;
 	to->rras = from.rras;
 	to->rrbs = from.rrbs;
-	to->rrs = from.rrs;
 	to->rrrs = from.rrrs;
-	to->direct_total = from.direct_total;
-	to->rev_total = from.rev_total;
+	to->total = from.total;
 }
 
 static void	calc_rbs(t_turk_params *p, t_turk_rots *rs)
@@ -63,11 +60,45 @@ static void	calc_rbs(t_turk_params *p, t_turk_rots *rs)
 	}
 }
 
+static t_turk_rots	ff(t_turk_params *p, t_turk_rots base)
+{
+	base.rrs = *ft_min_int(&(base.ras), &(base.rbs));
+	base.ras -= base.rrs;
+	base.rbs -= base.rrs;
+	base.total = base.ras + base.rbs + base.rrs;
+	return (base);
+}
+
+static t_turk_rots	fb(t_turk_params *p, t_turk_rots base)
+{
+	base.rrbs = p->bsz - base.rbs - (p->bsz == 1);
+	base.rbs = 0;
+	base.total = base.ras + base.rrbs;
+	return (base);
+}
+
+static t_turk_rots	bf(t_turk_params *p, t_turk_rots base)
+{
+	base.rras = p->asz - base.ras - (p->asz == 1);
+	base.ras = 0;
+	base.total = base.rbs + base.rras;
+	return (base);
+}
+
+static t_turk_rots	bb(t_turk_params *p, t_turk_rots base)
+{
+	base.rras = p->asz - base.ras - (p->asz == 1);
+	base.rrbs = p->bsz - base.rbs - (p->bsz == 1);
+	base.rrrs = *ft_min_int(&(base.rras), &(base.rrbs));
+	base.rras -= base.rrrs;
+	base.rrbs -= base.rrrs;
+	base.total = base.rras + base.rrbs + base.rrrs;
+	return (base);
+}
 static void	calc_price(t_turk_params *p, int c, t_turk_rots *rs)
 {
 	rs->ras = c;
 	rs->rras = p->asz - rs->ras - (p->asz == 1);
-	rs->rrbs = p->bsz - rs->rbs - (p->bsz == 1);
 	rs->rrs = *ft_min_int(&(rs->ras), &(rs->rbs));
 	rs->ras -= rs->rrs;
 	rs->rbs -= rs->rrs;
@@ -88,13 +119,12 @@ t_turk_rots	find_cheapest(t_turk_params *p)
 	d = *(p->a);
 	c = 0;
 	rots_init(&best, 0);
-	while (c < p->asz)
+	while (c < p->asz && c < best.total)
 	{
 		rots_init(&cur, d);
 		calc_rbs(p, &cur);
 		calc_price(p, c, &cur);
-		if (*ft_min_int(&(cur.direct_total), &(cur.rev_total)) < \
-			*ft_min_int(&(best.direct_total), &(best.rev_total)))
+		if (cur.total < best.total)
 			rots_copy(cur, &best);
 		d = d->next;
 		c ++;

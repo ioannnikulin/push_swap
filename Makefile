@@ -34,7 +34,7 @@ $(OBJS): %.o: %.c
 	$(PREFIX)$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ $(INCLUDES) -g
 
 $(ENDPOINT_OBJS): %.o: %.c
-	$(PREFIX)$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ $(INCLUDES) -g
+	$(PREFIX)$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ $(INCLUDES) -g -DMANUAL=1
 
 clean:
 	$(PREFIX)cd libft && make clean
@@ -46,9 +46,9 @@ fclean: clean
 
 re: fclean all
 
-CALL = ./$(NAME) 1 2 2147483647 3 4
+CALL = ./tests 0 3 4 6 7 5 2
 
-run:
+run: #dont try this with manual sorting!
 	$(PREFIX)echo $(CALL) | bash
 
 debug:

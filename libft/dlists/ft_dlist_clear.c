@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/28 14:25:59 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:30:45 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	ft_dlist_clear(t_dlist **lst, void (*del)(void *), int ret)
 	while (lstlen --)
 	{
 		n = cur->next;
-		del(cur->content);
+		if (del)
+			del(cur->content);
 		free(cur);
 		cur = n;
 	}

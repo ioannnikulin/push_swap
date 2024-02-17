@@ -6,12 +6,11 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 18:57:06 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:06:39 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_internal.h"
-#include <stdint.h>
 
 int	print(t_dlist *a, t_dlist *b, void (*p)(void *))
 {
