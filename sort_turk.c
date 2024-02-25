@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 16:02:48 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/25 20:44:38 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ int	sort_turk(t_dlist **a, t_dlist **b)
 	if (!params.prices)
 		return (error(0, &params));
 	while (params.asz > 3)
-		turns += send_cheapest(&params, find_cheapest(&params));
+		turns += send_cheapest(&params, find_cheapest(&params, 0));
+	turns += three(p);
 	turns += pour_into_a(p);
 	return (turns + 2);
 }

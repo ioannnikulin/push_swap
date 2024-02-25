@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
-/*   Updated: 2024/02/25 19:25:13 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/25 21:12:43 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 #include <stdio.h>
 #include "sort_turk_internal.h"
 #define START 0 
-#define SZ 31
+#define SZ 36
 
 typedef struct s_testcase {
 	int	*a;
 	int	asz;
 	int	*b;
 	int	bsz;
+	int	toa;
 	t_turk_rots exp;
 }	t_testcase;
 
@@ -45,44 +46,49 @@ static void printprices(t_turk_rots exp, t_turk_rots act, int print)
 	assert(exp.total == act.total);
 }
 
-t_turk_rots	find_cheapest(t_turk_params *p);
+t_turk_rots	find_cheapest(t_turk_params *p, int toa);
 
 void	sort_turk_price_tests()
 {
 	t_dlist *a, *b;
 	t_testcase t[SZ];
-	t[0]=(t_testcase){(int[]){5},1,(int[]){4,3,2,1}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
-	t[1]=(t_testcase){(int[]){5},1,(int[]){3,2,1,4}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
-	t[2]=(t_testcase){(int[]){5},1,(int[]){2,1,4,3}, 4, 	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
-	t[3]=(t_testcase){(int[]){5},1,(int[]){1,4,3,2}, 4, 	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
-	t[4]=(t_testcase){(int[]){4},1,(int[]){5,3,2,1}, 4, 	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
-	t[5]=(t_testcase){(int[]){4},1,(int[]){3,2,1,5}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
-	t[6]=(t_testcase){(int[]){4},1,(int[]){2,1,5,3}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
-	t[7]=(t_testcase){(int[]){4},1,(int[]){1,5,3,2}, 4, 	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
-	t[8]=(t_testcase){(int[]){3},1,(int[]){5,4,2,1}, 4, 	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
-	t[9]=(t_testcase){(int[]){3},1,(int[]){4,2,1,5}, 4, 	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
-	t[10]=(t_testcase){(int[]){3},1,(int[]){2,1,5,4}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
-	t[11]=(t_testcase){(int[]){3},1,(int[]){1,5,4,2}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
-	t[12]=(t_testcase){(int[]){2},1,(int[]){5,4,3,1}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
-	t[13]=(t_testcase){(int[]){2},1,(int[]){4,3,1,5}, 4, 	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
-	t[14]=(t_testcase){(int[]){2},1,(int[]){3,1,5,4}, 4, 	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
-	t[15]=(t_testcase){(int[]){2},1,(int[]){1,5,4,3}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
-	t[16]=(t_testcase){(int[]){1},1,(int[]){5,4,3,2}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
-	t[17]=(t_testcase){(int[]){1},1,(int[]){4,3,2,5}, 4, 	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
-	t[18]=(t_testcase){(int[]){1},1,(int[]){3,2,5,4}, 4,	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
-	t[19]=(t_testcase){(int[]){1},1,(int[]){2,5,4,3}, 4, 	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
-	t[20]=(t_testcase){(int[]){3},1,(int[]){2,1},2,			(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
-	t[21]=(t_testcase){(int[]){3},1,(int[]){1,2},2,			(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
-	t[22]=(t_testcase){(int[]){2},1,(int[]){3,1},2,			(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
-	t[23]=(t_testcase){(int[]){2},1,(int[]){1,3},2,			(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
-	t[24]=(t_testcase){(int[]){1},1,(int[]){3,2},2,			(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
-	t[25]=(t_testcase){(int[]){1},1,(int[]){2,3},2,			(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
-	//																		obj ra rb rr rra rrb rrr tot
-	t[26]=(t_testcase){(int[]){5,2},2,(int[]){7,6,4,3,0},5,		(t_turk_rots){0, 0, 0, 0,  0,  0,  1,  2}};
-	t[27]=(t_testcase){(int[]){1,6,3,9,4,8},6,(int[]){7,5,2},3,	(t_turk_rots){0, 0, 0, 0,  0,  0,  0,  1}};
-	t[28]=(t_testcase){(int[]){6,3,9,4,8},5,(int[]){1,7,5,2},4,	(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
-	t[29]=(t_testcase){(int[]){3,9,4,8},4,(int[]){6,5,2,1,7},5,	(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
-	t[30]=(t_testcase){(int[]){3,9,4},3,(int[]){8,7,6,5,2,1},6,	(t_turk_rots){0, 1, 0, 0,  0,  0,  0,  2}};
+	t[0]=(t_testcase){(int[]){5},1,(int[]){4,3,2,1}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
+	t[1]=(t_testcase){(int[]){5},1,(int[]){3,2,1,4}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
+	t[2]=(t_testcase){(int[]){5},1,(int[]){2,1,4,3}, 4, 0,	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
+	t[3]=(t_testcase){(int[]){5},1,(int[]){1,4,3,2}, 4, 0,	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
+	t[4]=(t_testcase){(int[]){4},1,(int[]){5,3,2,1}, 4, 0,	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
+	t[5]=(t_testcase){(int[]){4},1,(int[]){3,2,1,5}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
+	t[6]=(t_testcase){(int[]){4},1,(int[]){2,1,5,3}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
+	t[7]=(t_testcase){(int[]){4},1,(int[]){1,5,3,2}, 4, 0,	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
+	t[8]=(t_testcase){(int[]){3},1,(int[]){5,4,2,1}, 4, 0,	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
+	t[9]=(t_testcase){(int[]){3},1,(int[]){4,2,1,5}, 4, 0,	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
+	t[10]=(t_testcase){(int[]){3},1,(int[]){2,1,5,4}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
+	t[11]=(t_testcase){(int[]){3},1,(int[]){1,5,4,2}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
+	t[12]=(t_testcase){(int[]){2},1,(int[]){5,4,3,1}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
+	t[13]=(t_testcase){(int[]){2},1,(int[]){4,3,1,5}, 4, 0,	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
+	t[14]=(t_testcase){(int[]){2},1,(int[]){3,1,5,4}, 4, 0,	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
+	t[15]=(t_testcase){(int[]){2},1,(int[]){1,5,4,3}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
+	t[16]=(t_testcase){(int[]){1},1,(int[]){5,4,3,2}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
+	t[17]=(t_testcase){(int[]){1},1,(int[]){4,3,2,5}, 4, 0,	(t_turk_rots){0, 0, 0, 0, 0, 1, 0, 2}};
+	t[18]=(t_testcase){(int[]){1},1,(int[]){3,2,5,4}, 4,0,	(t_turk_rots){0, 0, 2, 0, 0, 0, 0, 3}};
+	t[19]=(t_testcase){(int[]){1},1,(int[]){2,5,4,3}, 4, 0,	(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
+	t[20]=(t_testcase){(int[]){3},1,(int[]){2,1},2,0,		(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
+	t[21]=(t_testcase){(int[]){3},1,(int[]){1,2},2,0,		(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
+	t[22]=(t_testcase){(int[]){2},1,(int[]){3,1},2,0,		(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
+	t[23]=(t_testcase){(int[]){2},1,(int[]){1,3},2,0,		(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
+	t[24]=(t_testcase){(int[]){1},1,(int[]){3,2},2,0,		(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
+	t[25]=(t_testcase){(int[]){1},1,(int[]){2,3},2,0,		(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
+	//																	   obj toa ra rb rr rra rrb rrr tot
+	t[26]=(t_testcase){(int[]){5,2},2,(int[]){7,6,4,3,0},5,0,	 (t_turk_rots){0, 0, 0, 0,  0,  0,  1,  2}};
+	t[27]=(t_testcase){(int[]){1,6,3,9,4,8},6,(int[]){7,5,2},3,0,(t_turk_rots){0, 0, 0, 0,  0,  0,  0,  1}};
+	t[28]=(t_testcase){(int[]){6,3,9,4,8},5,(int[]){1,7,5,2},4,0,(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
+	t[29]=(t_testcase){(int[]){3,9,4,8},4,(int[]){6,5,2,1,7},5,0,(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
+	t[30]=(t_testcase){(int[]){3,9,4},3,(int[]){8,7,6,5,2,1},6,0,(t_turk_rots){0, 1, 0, 0,  0,  0,  0,  2}};
+	t[31]=(t_testcase){(int[]){7,6,4,3,0},5,(int[]){5,2},2,1,	 (t_turk_rots){0, 0, 0, 0,  0,  0,  1,  2}};
+	t[32]=(t_testcase){(int[]){7,5,2},3,(int[]){1,6,3,9,4,8},6,1,(t_turk_rots){0, 0, 0, 0,  0,  0,  0,  1}};
+	t[33]=(t_testcase){(int[]){1,7,5,2},4,(int[]){6,3,9,4,8},5,1,(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
+	t[34]=(t_testcase){(int[]){6,5,2,1,7},5,(int[]){3,9,4,8},4,1,(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
+	t[35]=(t_testcase){(int[]){8,7,6,5,2,1},6,(int[]){3,9,4},3,1,(t_turk_rots){0, 1, 0, 0,  0,  0,  0,  2}};
 	printf("Starting %d TurkSort price-estimation tests.\n", SZ - START);
 	for (int i = START; i < SZ; i ++)
 	{
@@ -92,11 +98,12 @@ void	sort_turk_price_tests()
 			printf("test #%i\n", i);
 		a = ft_dlist_generate_int(t[i].a, t[i].asz, 0);
 		b = ft_dlist_generate_int(t[i].b, t[i].bsz, 0);
-		t_turk_rots act = find_cheapest(&(t_turk_params){&a, &b, t[i].asz, t[i].bsz});
+		t_turk_rots act = find_cheapest(&(t_turk_params){&a, &b, t[i].asz, t[i].bsz}, t[i].toa);
 		if ((CUR_DEBUG & OP_TEST_FULLDETAILS) > 0)
 		{
 			printf("SOURCE:\n");
 			assert(print(a, b, iprinter) == 0);
+			printf(t[i].toa ? "from B to A\n" : "from A to B\n");
 			printf("PRICES EXP / ACTUAL:\n");
 			printprices(t[i].exp, act, 1);
 		}

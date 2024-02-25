@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/25 19:16:16 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/25 21:32:46 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ static t_turk_rots	ff(t_turk_params *p, t_turk_rots base)
 	base.rbs -= base.rrs;
 	(void)p;
 	base.total = base.ras + base.rbs + base.rrs + 1;
+	#if (CUR_DEBUG & TURK_ALL_DIRECTION_PRICES) > 0
+		ft_printf("FF strategy: %i operations\n", base.total);
+	#endif
 	return (base);
 }
 
@@ -75,6 +78,9 @@ static t_turk_rots	fb(t_turk_params *p, t_turk_rots base)
 	base.rrbs = p->bsz - base.rbs - (p->bsz == 1);
 	base.rbs = 0;
 	base.total = base.ras + base.rrbs + 1;
+	#if (CUR_DEBUG & TURK_ALL_DIRECTION_PRICES) > 0
+		ft_printf("FB strategy: %i operations\n", base.total);
+	#endif
 	return (base);
 }
 
@@ -83,6 +89,9 @@ static t_turk_rots	bf(t_turk_params *p, t_turk_rots base)
 	base.rras = p->asz - base.ras - (p->asz == 1);
 	base.ras = 0;
 	base.total = base.rbs + base.rras + 1;
+	#if (CUR_DEBUG & TURK_ALL_DIRECTION_PRICES) > 0
+		ft_printf("BF strategy: %i operations\n", base.total);
+	#endif
 	return (base);
 }
 
@@ -96,6 +105,9 @@ static t_turk_rots	bb(t_turk_params *p, t_turk_rots base)
 	base.rras -= base.rrrs;
 	base.rrbs -= base.rrrs;
 	base.total = base.rras + base.rrbs + base.rrrs + 1;
+	#if (CUR_DEBUG & TURK_ALL_DIRECTION_PRICES) > 0
+		ft_printf("BB strategy: %i operations\n", base.total);
+	#endif
 	return (base);
 }
 
@@ -108,40 +120,50 @@ static void	calc_price(t_turk_params *p, t_turk_rots *rs, int c)
 	rs->ras = c;
 	rots_init(&best, 0);
 	best = ff(p, *rs);
-	#if (CUR_DEBUG & TURK_ALL_DIRECTION_PRICES) > 0
-		ft_printf("sending node #%i with FF strategy would take %i operations\n", c, best.total);
-	#endif
 	cand = fb(p, *rs);
-	#if (CUR_DEBUG & TURK_ALL_DIRECTION_PRICES) > 0
-		ft_printf("sending node #%i with FB strategy would take %i operations\n", c, cand.total);
-	#endif
 	if (cand.total < best.total)
 		best = cand;
 	cand = bf(p, *rs);
-	#if (CUR_DEBUG & TURK_ALL_DIRECTION_PRICES) > 0
-		ft_printf("sending node #%i with BF strategy would take %i operations\n", c, cand.total);
-	#endif
 	if (cand.total < best.total)
 		best = cand;
 	cand = bb(p, *rs);
-	#if (CUR_DEBUG & TURK_ALL_DIRECTION_PRICES) > 0
-		ft_printf("sending node #%i with BB strategy would take %i operations\n", c, cand.total);
-	#endif
 	if (cand.total < best.total)
 		best = cand;
 	rots_copy(best, rs);
 }
 
-t_turk_rots	find_cheapest(t_turk_params *p)
+static t_dlist*	direction_hack(t_turk_params *p, int toa, int mode, t_turk_rots *best, int *c)
+{
+	t_dlist	**t;
+
+	if (toa)
+	{
+		t = p->a;
+		p->a = p->b;
+		p->asz = p->bsz;
+		p->b = t;
+		ft_swap_i(&(p->asz), &(p->bsz));
+	}
+	if (mode == 1)
+		rots_init(best, 0);
+	if (mode == 2 && toa)
+	{
+		ft_swap_i(&(best->ras), &(best->rbs));
+		ft_swap_i(&(best->rras), &(best->rrbs));
+	}
+	if (c)
+		*c = 0;
+	return (*(p->a));
+}
+
+t_turk_rots	find_cheapest(t_turk_params *p, int toa)
 {
 	t_dlist 	*d;
 	int			c;
 	t_turk_rots	cur;
 	t_turk_rots	best;
 
-	d = *(p->a);
-	c = 0;
-	rots_init(&best, 0);
+	d = direction_hack(p, toa, 1, &best, &c);
 	while (c < p->asz && c < best.total)
 	{
 		rots_init(&cur, d);
@@ -154,5 +176,6 @@ t_turk_rots	find_cheapest(t_turk_params *p)
 		d = d->next;
 		c ++;
 	}
+	direction_hack(p, toa, 2, &best, 0);
 	return (best);
 }
