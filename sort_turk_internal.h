@@ -6,13 +6,15 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 17:56:51 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/25 18:49:00 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SORT_TURK_INTERNAL_H
 # define SORT_TURK_INTERNAL_H
 # include "push_swap_internal.h"
+# define TURK_EACH_NODE_PRICES 65536
+# define TURK_ALL_DIRECTION_PRICES 131072
 
 typedef struct s_turk_params
 {
@@ -31,8 +33,7 @@ typedef struct s_turk_rots
 	int		rras;
 	int		rrbs;
 	int		rrrs;
-	int		direct_total;
-	int		rev_total;
+	int		total;
 }	t_turk_rots;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/17 18:33:13 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/02/25 18:41:38 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define OP_TEST_FULLDETAILS 4096
 # define OP_TEST_BORDER 8192
 # define OP_TEST_FULLDETAILS_SUCCESS 32768
-# define MAX_DEBUG 65535
+# define MAX_DEBUG 262143
 # define MANUAL_OPS 256 + 128 + 16 + 32
 # define CUR_DEBUG MAX_DEBUG
 
