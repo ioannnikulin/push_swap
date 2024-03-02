@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/02 18:41:35 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/02 20:28:03 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define OP_TEST_FULLDETAILS_SUCCESS 32768
 # define STAGE_RESULT_PRINT 262144
 # define OPS_COUNT_TOTAL 524288
-# define MAX_DEBUG 1048575
+# define MAX_DEBUG 2097151
 # define MANUAL_OPS 256 + 128 + 16 + 32
 # define SUBMISSION 16384
 # define CUR_DEBUG SUBMISSION
