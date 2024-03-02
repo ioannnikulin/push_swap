@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/25 21:32:46 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:30:42 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ static t_dlist*	direction_hack(t_turk_params *p, int toa, int mode, t_turk_rots 
 	{
 		t = p->a;
 		p->a = p->b;
-		p->asz = p->bsz;
 		p->b = t;
 		ft_swap_i(&(p->asz), &(p->bsz));
 	}

@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
-/*   Updated: 2024/02/25 21:12:43 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:32:47 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void	sort_turk_price_tests()
 	t[30]=(t_testcase){(int[]){3,9,4},3,(int[]){8,7,6,5,2,1},6,0,(t_turk_rots){0, 1, 0, 0,  0,  0,  0,  2}};
 	t[31]=(t_testcase){(int[]){7,6,4,3,0},5,(int[]){5,2},2,1,	 (t_turk_rots){0, 0, 0, 0,  0,  0,  1,  2}};
 	t[32]=(t_testcase){(int[]){7,5,2},3,(int[]){1,6,3,9,4,8},6,1,(t_turk_rots){0, 0, 0, 0,  0,  0,  0,  1}};
-	t[33]=(t_testcase){(int[]){1,7,5,2},4,(int[]){6,3,9,4,8},5,1,(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
-	t[34]=(t_testcase){(int[]){6,5,2,1,7},5,(int[]){3,9,4,8},4,1,(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
-	t[35]=(t_testcase){(int[]){8,7,6,5,2,1},6,(int[]){3,9,4},3,1,(t_turk_rots){0, 1, 0, 0,  0,  0,  0,  2}};
+	t[33]=(t_testcase){(int[]){1,7,5,2},4,(int[]){6,3,9,4,8},5,1,(t_turk_rots){0, 2, 0, 0,  0,  0,  0,  3}};
+	t[34]=(t_testcase){(int[]){6,5,2,1,7},5,(int[]){3,9,4,8},4,1,(t_turk_rots){0, 2, 0, 0,  0,  0,  0,  3}};
+	t[35]=(t_testcase){(int[]){8,7,6,5,2,1},6,(int[]){3,9,4},3,1,(t_turk_rots){0, 0, 1, 0,  0,  0,  0,  2}};
 	printf("Starting %d TurkSort price-estimation tests.\n", SZ - START);
 	for (int i = START; i < SZ; i ++)
 	{
