@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
-/*   Updated: 2024/03/02 14:32:47 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:46:25 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "sort_turk_internal.h"
 #define START 0 
-#define SZ 36
+#define SZ 37
 
 typedef struct s_testcase {
 	int	*a;
@@ -78,17 +78,18 @@ void	sort_turk_price_tests()
 	t[23]=(t_testcase){(int[]){2},1,(int[]){1,3},2,0,		(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
 	t[24]=(t_testcase){(int[]){1},1,(int[]){3,2},2,0,		(t_turk_rots){0, 0, 0, 0, 0, 0, 0, 1}};
 	t[25]=(t_testcase){(int[]){1},1,(int[]){2,3},2,0,		(t_turk_rots){0, 0, 1, 0, 0, 0, 0, 2}};
-	//																	   obj toa ra rb rr rra rrb rrr tot
+	//																		 obj ra rb rr rra rrb rrr tot
 	t[26]=(t_testcase){(int[]){5,2},2,(int[]){7,6,4,3,0},5,0,	 (t_turk_rots){0, 0, 0, 0,  0,  0,  1,  2}};
 	t[27]=(t_testcase){(int[]){1,6,3,9,4,8},6,(int[]){7,5,2},3,0,(t_turk_rots){0, 0, 0, 0,  0,  0,  0,  1}};
 	t[28]=(t_testcase){(int[]){6,3,9,4,8},5,(int[]){1,7,5,2},4,0,(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
 	t[29]=(t_testcase){(int[]){3,9,4,8},4,(int[]){6,5,2,1,7},5,0,(t_turk_rots){0, 0, 2, 0,  0,  0,  0,  3}};
 	t[30]=(t_testcase){(int[]){3,9,4},3,(int[]){8,7,6,5,2,1},6,0,(t_turk_rots){0, 1, 0, 0,  0,  0,  0,  2}};
-	t[31]=(t_testcase){(int[]){7,6,4,3,0},5,(int[]){5,2},2,1,	 (t_turk_rots){0, 0, 0, 0,  0,  0,  1,  2}};
-	t[32]=(t_testcase){(int[]){7,5,2},3,(int[]){1,6,3,9,4,8},6,1,(t_turk_rots){0, 0, 0, 0,  0,  0,  0,  1}};
-	t[33]=(t_testcase){(int[]){1,7,5,2},4,(int[]){6,3,9,4,8},5,1,(t_turk_rots){0, 2, 0, 0,  0,  0,  0,  3}};
-	t[34]=(t_testcase){(int[]){6,5,2,1,7},5,(int[]){3,9,4,8},4,1,(t_turk_rots){0, 2, 0, 0,  0,  0,  0,  3}};
-	t[35]=(t_testcase){(int[]){8,7,6,5,2,1},6,(int[]){3,9,4},3,1,(t_turk_rots){0, 0, 1, 0,  0,  0,  0,  2}};
+	t[31]=(t_testcase){(int[]){0,3,4,6,7},5,(int[]){5,2},2,1,	 (t_turk_rots){0, 0, 0, 1,  0,  0,  0,  2}};
+	t[32]=(t_testcase){(int[]){2,5,7},3,(int[]){1,6,3,9,4,8},6,1,(t_turk_rots){0, 0, 0, 0,  0,  0,  0,  1}};
+	t[33]=(t_testcase){(int[]){2,5,7,1},4,(int[]){6,3,9,4,8},5,1,(t_turk_rots){0, 0, 0, 1,  0,  0,  0,  2}};
+	t[34]=(t_testcase){(int[]){7,1,2,5,6},5,(int[]){3,9,4,8},4,1,(t_turk_rots){0, 0, 0, 1,  0,  0,  0,  2}};
+	t[35]=(t_testcase){(int[]){1,2,5,6,7,8},6,(int[]){3,9,4},3,1,(t_turk_rots){0, 0, 1, 0,  0,  0,  0,  2}};
+	t[36]=(t_testcase){(int[]){1,2,4},3,(int[]){3},1,1,			 (t_turk_rots){0, 0, 0, 0,  1,  0,  0,  2}};
 	printf("Starting %d TurkSort price-estimation tests.\n", SZ - START);
 	for (int i = START; i < SZ; i ++)
 	{

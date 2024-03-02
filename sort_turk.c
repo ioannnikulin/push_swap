@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/02 17:04:49 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:51:30 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ static int	send_cheapest(t_turk_params *p, t_turk_rots rs, int toa)
 	if (toa)
 	{
 		op_pa(p->a, p->b);
-		p->bsz ++;
+		p->asz ++;
+		p->bsz --;
 		return (rs.total);
 	}
 	op_pb(p->a, p->b);
 	p->asz --;
+	p->bsz ++;
 	#if (CUR_DEBUG & STAGE_RESULT_PRINT) > 0
 	print(*(p->a), *(p->b), iprinter);
 	#endif
@@ -106,7 +108,6 @@ int	sort_turk(t_dlist **a, t_dlist **b)
 	#endif
 	if (turns != -1)
 		return (turns);
-	params.asz -= 2;
 	while (params.asz > 3)
 		turns += send_cheapest(&params, find_cheapest(&params, 0), 0);
 	turns += three(params.a);

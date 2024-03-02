@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/02 17:06:46 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:41:35 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define OPS_COUNT_TOTAL 524288
 # define MAX_DEBUG 1048575
 # define MANUAL_OPS 256 + 128 + 16 + 32
-# define CUR_DEBUG MAX_DEBUG
-
+# define SUBMISSION 16384
+# define CUR_DEBUG SUBMISSION
 typedef enum e_OP
 {
 	PA, PB, SA, SB, SS, RA, RB, RR, RRA, RRB, RRR

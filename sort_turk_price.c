@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/02 14:30:42 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:32:20 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	rots_init(t_turk_rots *to, t_dlist *d)
 
 static void	rots_copy(t_turk_rots from, t_turk_rots *to)
 {
+	to->obj = from.obj;
 	to->ras = from.ras;
 	to->rbs = from.rbs;
 	to->rrs = from.rrs;
@@ -35,7 +36,7 @@ static void	rots_copy(t_turk_rots from, t_turk_rots *to)
 	to->total = from.total;
 }
 
-static void	calc_rbs(t_turk_params *p, t_turk_rots *rs)
+static void	calc_rbs(t_turk_params *p, t_turk_rots *rs, int toa)
 {
 	t_dlist *justunder;
 	int		juncmp;
@@ -46,12 +47,10 @@ static void	calc_rbs(t_turk_params *p, t_turk_rots *rs)
 	rs->rbs = 0;
 	while (1)
 	{
-		juncmp = ft_voidptr_icmp(rs->obj->content, justunder->content);
-		jabcmp = ft_voidptr_icmp(justunder->prev->content, rs->obj->content);
-		junjabcmp = ft_voidptr_icmp(justunder->content, justunder->prev->content);
-		if (juncmp < 0 && jabcmp > 0 && junjabcmp > 0)
-			return ;
-		if (juncmp > 0 && jabcmp < 0 && junjabcmp > 0)
+		juncmp = toa * ft_voidptr_icmp(rs->obj->content, justunder->content);
+		jabcmp = toa * ft_voidptr_icmp(justunder->prev->content, rs->obj->content);
+		junjabcmp = toa * ft_voidptr_icmp(justunder->content, justunder->prev->content);
+		if (junjabcmp > 0 && (juncmp > 0 || jabcmp > 0))
 			return ;
 		if (juncmp > 0 && jabcmp > 0 && junjabcmp < 0)
 			return ;
@@ -111,12 +110,16 @@ static t_turk_rots	bb(t_turk_params *p, t_turk_rots base)
 	return (base);
 }
 
-static void	calc_price(t_turk_params *p, t_turk_rots *rs, int c)
+static void	calc_price(t_turk_params *p, t_turk_rots *rs, int c, int toa)
 {
 	t_turk_rots	best;
 	t_turk_rots	cand;
 
-	calc_rbs(p, rs);
+	if (toa == 1)
+		toa = -1;
+	else
+		toa = 1;
+	calc_rbs(p, rs, toa);
 	rs->ras = c;
 	rots_init(&best, 0);
 	best = ff(p, *rs);
@@ -166,7 +169,7 @@ t_turk_rots	find_cheapest(t_turk_params *p, int toa)
 	while (c < p->asz && c < best.total)
 	{
 		rots_init(&cur, d);
-		calc_price(p, &cur, c);
+		calc_price(p, &cur, c, toa);
 		if (cur.total < best.total)
 			rots_copy(cur, &best);
 		#if (CUR_DEBUG & TURK_EACH_NODE_PRICES) > 0

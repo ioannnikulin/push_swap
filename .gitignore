@@ -7,3 +7,4 @@ errors
 tests
 *.d
 *.tmp
+checker_linux
