@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/03 14:43:21 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/03 17:31:28 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	print(t_dlist *a, t_dlist *b, void (*p)(void *))
 		ft_printf("\n================================");
 	if ((CUR_DEBUG & NEWLINE_BETWEEN_ELEMENTS) > 0)
 		delim[0] = '\n';
-	ret = print_stack(a, name, delim, p) | print_stack(a, name, delim, p);
+	ret = print_stack(a, 'A', delim, p) | print_stack(b, 'B', delim, p);
 	if ((CUR_DEBUG & BORDER_PRINTOUT) > 0)
 		ft_printf("\n================================");
 	ft_printf("\n");

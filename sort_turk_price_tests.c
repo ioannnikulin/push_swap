@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
-/*   Updated: 2024/03/02 17:46:25 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/03 20:31:03 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	sort_turk_price_tests()
 			printf("test #%i\n", i);
 		a = ft_dlist_generate_int(t[i].a, t[i].asz, 0);
 		b = ft_dlist_generate_int(t[i].b, t[i].bsz, 0);
-		t_turk_rots act = find_cheapest(&(t_turk_params){&a, &b, t[i].asz, t[i].bsz}, t[i].toa);
+		t_turk_rots act = find_cheapest(&(t_turk_params){&a, &b, t[i].asz, t[i].bsz, 0}, t[i].toa);
 		if ((CUR_DEBUG & OP_TEST_FULLDETAILS) > 0)
 		{
 			printf("SOURCE:\n");

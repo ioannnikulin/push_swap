@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/02 20:28:39 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/03 18:19:23 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	print_node_and_check(t_dlist *cur, int debug_lvl, void (*p)(void *))
 		ft_printf("[%p] ", cur);
 	p(cur->content);
 	if ((debug_lvl & LIS_INFO) > 0)
-		ft_printf("lisl %i, flags %i\n", cur->lisl, cur->flags);
+		ft_printf(" lisl %i, flags %i, lisn %p ", cur->lisl, cur->flags, cur->lisn);
 	if ((debug_lvl & NEXT) > 0)
 		ft_printf(" (%p)", cur->next);
 	if ((debug_lvl & ANGLES) > 0)

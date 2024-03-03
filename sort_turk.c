@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/03 13:13:24 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/03 21:26:13 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_turk_rots	find_cheapest(t_turk_params *p, int toa);
 int	three(t_dlist **a);
-int	mark_lis(t_dlist **a, int asz);
+t_dlist	*mark_lis(t_dlist *a, int asz);
 
 static int	send_cheapest(t_turk_params *p, t_turk_rots rs, int toa)
 {
@@ -40,9 +40,8 @@ static int	send_cheapest(t_turk_params *p, t_turk_rots rs, int toa)
 	op_pb(p->a, p->b);
 	p->asz --;
 	p->bsz ++;
-	#if (CUR_DEBUG & STAGE_RESULT_PRINT) > 0
-	print(*(p->a), *(p->b), iprinter);
-	#endif
+	if ((CUR_DEBUG & STAGE_RESULT_PRINT) > 0)
+		print(*(p->a), *(p->b), iprinter);
 	return (rs.total);
 }
 
@@ -80,17 +79,19 @@ static int	send_one_to_b(t_turk_params *p)
 	fwd = 0;
 	bwd = 0;
 	np = *(p->a);
-	while ((np->flags & LEAVE_IN_A) == 0)
+	while ((np->flags & LEAVE_IN_A) > 0)
 	{
 		np = np->next;
 		fwd ++;
 	}
 	np = *(p->a);
-	while ((np->flags & LEAVE_IN_A) == 0)
+	while ((np->flags & LEAVE_IN_A) > 0)
 	{
 		np = np->prev;
 		bwd ++;
 	}
+	p->asz --;
+	p->bsz ++;
 	if (fwd < bwd)
 	{
 		res = fwd + 1;
@@ -108,7 +109,7 @@ static int	send_one_to_b(t_turk_params *p)
 
 static int	debut(t_turk_params *p)
 {
-	int	lis;
+	int	turns;
 
 	if (p->asz < 2 || sorted(*(p->a)) == p->asz)
 		return (0);
@@ -119,37 +120,37 @@ static int	debut(t_turk_params *p)
 	}
 	if (p->asz == 3)
 		return (three(p->a) + pour_into_a(p));
-	lis = mark_lis(p);
-	send_one_to_b(p);
-	if (lis == p->asz)
-		return (1 + pour_into_a(p));
-	send_one_to_b(p);
-	if (lis == p->asz)
-		return (2 + pour_into_a(p));
-	return (-1);
+	p->lis_start = mark_lis(*(p->a), p->asz);
+	turns = send_one_to_b(p);
+	if (p->lis_start->lisl == p->asz)
+		return (turns + pour_into_a(p));
+	turns += send_one_to_b(p);
+	if (p->lis_start->lisl == p->asz)
+		return (turns + pour_into_a(p));
+	return (-turns);
 }
 
 int	sort_turk(t_dlist **a, t_dlist **b)
 {
 	int				turns;
 	t_turk_params	params;
+	int				sent;
 
 	params.asz = ft_dlist_size(*a);
 	params.bsz = 0;
 	params.a = a;
 	params.b = b;
 	turns = debut(&params);
-	#if (CUR_DEBUG & STAGE_RESULT_PRINT) > 0
-	print(*a, *b, iprinter);
-	#endif
-	if (turns != -1)
+	if ((CUR_DEBUG & STAGE_RESULT_PRINT) > 0)
+		print(*a, *b, iprinter);
+	if (turns >= 0)
 		return (turns);
-	while (params.asz > 3)
+	turns = -turns;
+	sent = 2;
+	while (params.asz - sent ++ < params.lis_start->lisl)
 		turns += send_cheapest(&params, find_cheapest(&params, 0), 0);
-	turns += three(params.a);
 	turns += pour_into_a(&params);
-	#if (CUR_DEBUG & STAGE_RESULT_PRINT) > 0
-	print(*a, *b, iprinter);
-	#endif
+	if ((CUR_DEBUG & STAGE_RESULT_PRINT) > 0)
+		print(*a, *b, iprinter);
 	return (turns + 2);
 }

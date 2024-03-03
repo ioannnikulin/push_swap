@@ -55,7 +55,7 @@ debug:
 	$(PREFIX)@gdbtui --args $(CALL:'=)
 
 TESTF = .
-TEST_NAMES = op_tests.c err_tests.c main_test.c sort_turk_price_tests.c sort_turk_threes_tests.c sort_mark_lis_tests.c
+TEST_NAMES = op_tests.c err_tests.c main_test.c sort_turk_price_tests.c sort_turk_threes_tests.c sort_mark_lis_tests.c performance_tests.c
 TEST_SRCS = $(addprefix $(TESTF)/, $(TEST_NAMES))
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 

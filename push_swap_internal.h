@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/03 13:11:19 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/03 21:30:14 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 # define STAGE_RESULT_PRINT 262144
 # define OPS_COUNT_TOTAL 524288
 # define MAX_DEBUG 2097151
-# define MANUAL_OPS 256 + 128 + 16 + 32
-# define SUBMISSION 16384
-# define CUR_DEBUG SUBMISSION
+# define MANUAL_OPS (256 + 128 + 16 + 32)
+# define SUBMISSION (OP_NAME | OP_TEST_NUMBERS)
+# define CUR_DEBUG (MAX_DEBUG & ~PREV & ~NEXT)
 
 # define LEAVE_IN_A 1
 typedef enum e_OP
