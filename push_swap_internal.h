@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/02 20:28:03 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/03 13:11:19 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define MANUAL_OPS 256 + 128 + 16 + 32
 # define SUBMISSION 16384
 # define CUR_DEBUG SUBMISSION
+
+# define LEAVE_IN_A 1
 typedef enum e_OP
 {
 	PA, PB, SA, SB, SS, RA, RB, RR, RRA, RRB, RRR

@@ -6,12 +6,12 @@ INCLUDES = -I. -Ilibft
 
 FOLDER = .
 
-FILENAMES = aux.c op_swap.c op_push.c op_rot.c op_rrot.c printers.c sort_turk_price.c sort_aux.c
+FILENAMES = aux.c op_swap.c op_push.c op_rot.c op_rrot.c printers.c sort_turk_price.c sort_aux.c sort_turk_price_rotation_strategies.c sort_turk_price_rotation_ops.c sort_mark_lis.c
 SRCS = $(addprefix $(FOLDER)/, $(FILENAMES))
 OBJS = $(SRCS:.c=.o)
 DEPENDS = $(SRCS:.c=.d)
 
-ENDPOINT_FILENAMES = main.c sorter.c sort_turk.c#sort_manual.c
+ENDPOINT_FILENAMES = main.c sorter.c sort_turk.c
 ENDPOINT_SRCS = $(addprefix $(FOLDER)/, $(ENDPOINT_FILENAMES))
 ENDPOINT_OBJS = $(ENDPOINT_SRCS:.c=.o)
 ENDPOINT_DEPENDS = $(SRCS:.c=.d)
@@ -55,7 +55,7 @@ debug:
 	$(PREFIX)@gdbtui --args $(CALL:'=)
 
 TESTF = .
-TEST_NAMES = op_tests.c err_tests.c main_test.c sort_turk_price_tests.c sort_turk_threes_tests.c
+TEST_NAMES = op_tests.c err_tests.c main_test.c sort_turk_price_tests.c sort_turk_threes_tests.c sort_mark_lis_tests.c
 TEST_SRCS = $(addprefix $(TESTF)/, $(TEST_NAMES))
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 

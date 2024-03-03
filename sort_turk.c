@@ -6,15 +6,15 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/02 20:34:50 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/03 13:13:24 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_turk_internal.h"
-#define LEAVE_IN_A 1
 
 t_turk_rots	find_cheapest(t_turk_params *p, int toa);
 int	three(t_dlist **a);
+int	mark_lis(t_dlist **a, int asz);
 
 static int	send_cheapest(t_turk_params *p, t_turk_rots rs, int toa)
 {
@@ -70,60 +70,6 @@ static int	pour_into_a(t_turk_params *p)
 	return (turns);
 }
 
-int	lis(t_dlist *obj, t_dlist *end)
-{
-	t_dlist	*cur;
-	t_dlist	*best;
-
-	if (obj->lisl != 0)
-		return (obj->lisl);
-	if (obj->next == end)
-	{
-		obj->lisl = 1;
-		return (1);
-	}
-	cur = obj->next;
-	best = 0;
-	while (cur != end)
-	{
-		if (ft_voidptr_icmp(obj->content, cur->content) < 0 && (!best || lis(cur, end) > best->lisl))
-			best = cur;
-		cur = cur->next;
-	}
-	obj->lisl = best->lisl + 1;
-	obj->lisn = best;
-	return (obj->lisl);
-}
-
-int	mark_sorted_subseq(t_turk_params *p)
-{
-	t_dlist	*cur;
-	t_dlist	*best;
-	int	checked;
-
-	print(*(p->a), *(p->b), iprinter);
-	best = *(p->a);
-	lis(best, *(p->a));
-	cur = best->next;
-	checked = 1;
-	while (cur->next != *(p->a))
-	{
-		lis(cur, *(p->a));
-		checked ++;
-		if (best->lisl < cur->lisl)
-			best = cur;
-		if (best->lisl > p->asz - checked)
-			break;
-	}
-	cur = best;
-	while (cur != 0)
-	{
-		cur->flags = cur->flags | LEAVE_IN_A;
-		cur = cur->lisn;
-	}
-	return (best->lisl);
-}
-
 static int	send_one_to_b(t_turk_params *p)
 {
 	int	fwd;
@@ -173,7 +119,7 @@ static int	debut(t_turk_params *p)
 	}
 	if (p->asz == 3)
 		return (three(p->a) + pour_into_a(p));
-	lis = mark_sorted_subseq(p);
+	lis = mark_lis(p);
 	send_one_to_b(p);
 	if (lis == p->asz)
 		return (1 + pour_into_a(p));
