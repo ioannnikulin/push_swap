@@ -23,8 +23,6 @@ libft:
 
 $(NAME): libft endpoint
 
-# TODO remove tests folder from libft, it has stdio::printf!
-
 endpoint: $(OBJS) $(ENDPOINT_OBJS)
 	$(PREFIX)$(CC) -o $(NAME) $(OBJS) $(ENDPOINT_OBJS) -Llibft -lft
 
@@ -45,27 +43,5 @@ fclean: clean
 	$(PREFIX)rm -f $(NAME)
 
 re: fclean all
-
-CALL = ./tests 0 3 4 6 7 5 2
-
-run: #dont try this with manual sorting!
-	$(PREFIX)echo $(CALL) | bash
-
-debug:
-	$(PREFIX)@gdbtui --args $(CALL:'=)
-
-TESTF = .
-TEST_NAMES = op_tests.c err_tests.c main_test.c sort_turk_price_tests.c sort_turk_threes_tests.c sort_mark_lis_tests.c performance_tests.c
-TEST_SRCS = $(addprefix $(TESTF)/, $(TEST_NAMES))
-TEST_OBJS = $(TEST_SRCS:.c=.o)
-
-$(TEST_OBJS): %.o: %.c
-	$(PREFIX)$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) -g
-
-tests: libft $(TEST_OBJS) $(OBJS) endpoint
-	$(PREFIX)$(CC) -o $@ $(TEST_OBJS) $(OBJS) -Llibft -lft
-
-testfclean: fclean
-	$(PREFIX)rm -f $(TEST_OBJS) tests
 
 .PHONY: all clean fclean re test libft
