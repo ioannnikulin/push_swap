@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/03 21:26:13 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:10:05 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ static int	debut(t_turk_params *p)
 {
 	int	turns;
 
-	if (p->asz < 2 || sorted(*(p->a)) == p->asz)
+	int srt = sorted(*(p->a));
+	if (p->asz < 2 || sorted(*(p->a)) == p->asz || srt == p->asz)
 		return (0);
 	if (p->asz == 2)
 	{
@@ -124,9 +125,13 @@ static int	debut(t_turk_params *p)
 	turns = send_one_to_b(p);
 	if (p->lis_start->lisl == p->asz)
 		return (turns + pour_into_a(p));
+	if (p->asz == 3)
+		return (three(p->a) + pour_into_a(p));
 	turns += send_one_to_b(p);
 	if (p->lis_start->lisl == p->asz)
 		return (turns + pour_into_a(p));
+	if (p->asz == 3)
+		return (three(p->a) + pour_into_a(p));
 	return (-turns);
 }
 
@@ -147,8 +152,11 @@ int	sort_turk(t_dlist **a, t_dlist **b)
 		return (turns);
 	turns = -turns;
 	sent = 2;
-	while (params.asz - sent ++ < params.lis_start->lisl)
+	while (params.asz > params.lis_start->lisl)
+	{
 		turns += send_cheapest(&params, find_cheapest(&params, 0), 0);
+		sent ++;
+	}
 	turns += pour_into_a(&params);
 	if ((CUR_DEBUG & STAGE_RESULT_PRINT) > 0)
 		print(*a, *b, iprinter);

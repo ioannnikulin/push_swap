@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin  yb        #+#    #+#             */
-/*   Updated: 2024/03/03 21:29:39 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:12:50 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "sort_turk_internal.h"
-#define START 119 
+#define START 125 
 #define SZ 130
 
 typedef struct s_testcase {

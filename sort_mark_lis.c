@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/03 18:55:18 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:52:54 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,33 @@ static int	lis(t_dlist *obj, t_dlist *end)
 	return (obj->lisl);
 }
 
+static t_dlist*	smallest(t_dlist* cur, t_dlist *end)
+{
+	t_dlist *res;
+
+	if (!cur->next || cur->next == end)
+		return (cur);
+	res = smallest(cur->next, end);
+	if (ft_voidptr_icmp(cur->content, res->content) < 0)
+		res = cur;
+	return (res);
+}
+
 t_dlist	*mark_lis(t_dlist *a, int asz)
 {
 	t_dlist	*cur;
 	t_dlist	*best;
 	int	checked;
 
+	a = smallest(a, a);
+	if ((CUR_DEBUG & LIS_DEBUG) > 0)
+	{
+		ft_printf("smallest element is ");
+		iprinter(a->content);
+		ft_printf("\n");
+	}
+	lis(a, a);
 	best = a;
-	lis(best, a);
 	cur = best->next;
 	checked = 1;
 	while (cur->next != a)
