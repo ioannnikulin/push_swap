@@ -6,15 +6,15 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 20:48:16 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:41:09 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_turk_internal.h"
 
 t_turk_rots	find_cheapest(t_turk_params *p, int toa);
-int	three(t_dlist **a);
-t_dlist	*mark_lis(t_dlist *a, int asz);
+int			three(t_dlist **a);
+t_dlist		*mark_lis(t_dlist *a, int asz);
 
 static int	send_cheapest(t_turk_params *p, t_turk_rots rs, int toa)
 {
@@ -71,10 +71,10 @@ static int	pour_into_a(t_turk_params *p)
 
 static int	send_one_to_b(t_turk_params *p)
 {
-	int	fwd;
-	int	bwd;
+	int		fwd;
+	int		bwd;
 	t_dlist	*np;
-	int	res;
+	int		res;
 
 	fwd = 0;
 	bwd = 0;

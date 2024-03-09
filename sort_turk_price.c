@@ -6,19 +6,19 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 19:52:32 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:40:08 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_turk_internal.h"
 
-void	rots_init(t_turk_rots *to, t_dlist *d);
-void	rots_copy(t_turk_rots from, t_turk_rots *to);
+void		rots_init(t_turk_rots *to, t_dlist *d);
+void		rots_copy(t_turk_rots from, t_turk_rots *to);
 t_turk_rots	ff(t_turk_params *p, t_turk_rots base);
 t_turk_rots	fb(t_turk_params *p, t_turk_rots base);
 t_turk_rots	bf(t_turk_params *p, t_turk_rots base);
 t_turk_rots	bb(t_turk_params *p, t_turk_rots base);
-void	calc_rbs(t_turk_params *p, t_turk_rots *rs, int toa);
+void		calc_rbs(t_turk_params *p, t_turk_rots *rs, int toa);
 
 static void	calc_price(t_turk_params *p, t_turk_rots *rs, int c, int toa)
 {
@@ -45,7 +45,8 @@ static void	calc_price(t_turk_params *p, t_turk_rots *rs, int c, int toa)
 	rots_copy(best, rs);
 }
 
-static t_dlist*	direction_hack(t_turk_params *p, int toa, int mode, t_turk_rots *best, int *c)
+static t_dlist	*direction_hack(t_turk_params *p, int toa,
+	int mode, t_turk_rots *best, int *c)
 {
 	t_dlist	**t;
 
@@ -70,7 +71,7 @@ static t_dlist*	direction_hack(t_turk_params *p, int toa, int mode, t_turk_rots 
 
 t_turk_rots	find_cheapest(t_turk_params *p, int toa)
 {
-	t_dlist 	*d;
+	t_dlist		*d;
 	int			c;
 	t_turk_rots	cur;
 	t_turk_rots	best;
@@ -92,7 +93,6 @@ t_turk_rots	find_cheapest(t_turk_params *p, int toa)
 		d = d->next;
 		c ++;
 	}
-	// TODO: possible error if none are eligible for sending (all marked to be in lis)
 	direction_hack(p, toa, 2, &best, 0);
 	return (best);
 }

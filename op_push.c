@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:50:38 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/27 21:40:34 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:36:49 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	op_p(t_dlist **from, t_dlist **to)
 {
-	int	sz;
+	int		sz;
 	t_dlist	*a;
 
 	sz = ft_dlist_size(*from);

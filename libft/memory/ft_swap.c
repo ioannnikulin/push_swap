@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 21:23:23 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/25 21:26:16 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 20:58:50 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_swap_i(int *a, int *b)
 
 void	ft_swap_s(char **a, char **b)
 {
-	char*	t;
+	char	*t;
 
 	t = *a;
 	*a = *b;

@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:16:17 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 20:20:19 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:25:07 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ typedef struct s_dlist
 	struct s_dlist	*next;
 }	t_dlist;
 t_dlist	*ft_dlist_new(void *content);
-t_dlist	*ft_dlist_generate(char	*texts[], int end_to);
-t_dlist	*ft_dlist_generate_int(int	nums[], int sz, int end_to);
+t_dlist	*ft_dlist_generate(char *texts[], int end_to);
+t_dlist	*ft_dlist_generate_int(int nums[], int sz, int end_to);
 void	ft_dlist_add_front(t_dlist **lst, t_dlist *new);
 int		ft_dlist_size(t_dlist *lst);
 t_dlist	*ft_dlist_last(t_dlist *lst);
@@ -110,11 +110,12 @@ int		ft_dlist_clear(t_dlist **lst, void (*del)(void *), int ret);
 void	ft_dlist_iter(t_dlist *lst, void (*f)(void *));
 t_dlist	*ft_dlist_map(t_dlist *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_dlist_print(t_dlist *lst, int debug_lvl, char *delim,
-		void (*p)(void *, int));
+			void (*p)(void *, int));
 // compares return 0 if lists equal,
 // otherwise - number (not index) of first different node,
 // negative if first list is smaller
-int		ft_dlist_ncmp(t_dlist *a, t_dlist *b, int n, int (*cmp)(void *, void *));
+int		ft_dlist_ncmp(t_dlist *a, t_dlist *b, int n,
+			int (*cmp)(void *, void *));
 int		ft_dlist_ncmp_str(t_dlist *a, t_dlist *b, int n);
 int		ft_dlist_ncmp_i(t_dlist *a, t_dlist *b, int n);
 int		ft_voidptr_strcmp(void *a, void *b);

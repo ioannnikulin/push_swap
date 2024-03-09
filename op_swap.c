@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:50:38 by inikulin          #+#    #+#             */
-/*   Updated: 2024/01/28 14:31:21 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:32:06 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	op_s(t_dlist **root)
 {
-	int	sz;
+	int		sz;
 	t_dlist	*a;
-	t_dlist *b;
+	t_dlist	*b;
 
 	sz = ft_dlist_size(*root);
 	if (sz < 2)

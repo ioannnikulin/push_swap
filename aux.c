@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/17 18:30:24 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:31:38 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	my_atoi(char **c, int *err)
 	{
 		curval = curval * 10 + *((*c)++) - '0';
 		*err = 0;
-		if ((sign > 0 && curval > INT_MAX) || (sign < 0 && -curval < INT_MIN))
+		if ((sign > 0 && curval > INT_MAX) || (sign < 0 && - curval < INT_MIN))
 		{
 			(*err) = 1;
 			return (0);

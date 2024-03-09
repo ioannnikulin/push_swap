@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/03 19:02:53 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:37:11 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 typedef struct s_turk_params
 {
-	t_dlist **a;
-	t_dlist **b;
+	t_dlist	**a;
+	t_dlist	**b;
 	int		asz;
 	int		bsz;
 	t_dlist	*lis_start;
@@ -27,7 +27,7 @@ typedef struct s_turk_params
 
 typedef struct s_turk_rots
 {
-	t_dlist *obj;
+	t_dlist	*obj;
 	int		ras;
 	int		rbs;
 	int		rrs;
