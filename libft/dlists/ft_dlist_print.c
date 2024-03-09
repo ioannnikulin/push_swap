@@ -6,14 +6,14 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/03 18:19:23 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 20:21:08 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int	print_node_and_check(t_dlist *cur, int debug_lvl, void (*p)(void *))
+static int	print_node_and_check(t_dlist *cur, int debug_lvl, void (*p)(void *, int))
 {
 	int	ret;
 
@@ -28,7 +28,7 @@ static int	print_node_and_check(t_dlist *cur, int debug_lvl, void (*p)(void *))
 		ft_printf("(%p) ", cur->prev);
 	if ((debug_lvl & ADDR) > 0)
 		ft_printf("[%p] ", cur);
-	p(cur->content);
+	p(cur->content, cur->flags);
 	if ((debug_lvl & LIS_INFO) > 0)
 		ft_printf(" lisl %i, flags %i, lisn %p ", cur->lisl, cur->flags, cur->lisn);
 	if ((debug_lvl & NEXT) > 0)
@@ -51,7 +51,7 @@ static int	print_check(t_dlist *err, int debug_lvl)
 	return (0);
 }
 
-int	ft_dlist_print(t_dlist *lst, int debug_lvl, char *delim, void (*p)(void *))
+int	ft_dlist_print(t_dlist *lst, int debug_lvl, char *delim, void (*p)(void *, int))
 {
 	t_dlist	*cur;
 	int		lstlen;

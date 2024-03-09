@@ -6,13 +6,13 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/03 17:31:28 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 20:24:50 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_internal.h"
 
-static int	print_stack(t_dlist *a, char name, char delim[2], void (*p)(void *))
+static int	print_stack(t_dlist *a, char name, char delim[2], void (*p)(void *, int))
 {
 	int	ret;
 
@@ -26,7 +26,7 @@ static int	print_stack(t_dlist *a, char name, char delim[2], void (*p)(void *))
 	return (ret);
 }
 
-int	print(t_dlist *a, t_dlist *b, void (*p)(void *))
+int	print(t_dlist *a, t_dlist *b, void (*p)(void *, int))
 {
 	char	delim[2];
 	int		ret;
@@ -44,12 +44,32 @@ int	print(t_dlist *a, t_dlist *b, void (*p)(void *))
 	return (ret);
 }
 
-void	sprinter(void *content)
+void	sprinter(void *content, int flags)
 {
-	ft_printf("%s", (char *)content);
+	if ((CUR_DEBUG & LIS_DEBUG) > 0)
+	{
+		if ((flags & LEAVE_IN_A) > 0)
+			ft_printf("*");
+		else 
+			ft_printf(" ");
+	}
+	if ((CUR_DEBUG & FIXED_WIDTH) > 0)
+		ft_printf("%4s", (char *)content);
+	else
+		ft_printf("%s", (char *)content);
 }
 
-void	iprinter(void *content)
+void	iprinter(void *content, int flags)
 {
-	ft_printf("%i", (int)(intptr_t)content);
+	if ((CUR_DEBUG & LIS_DEBUG) > 0)
+	{
+		if ((flags & LEAVE_IN_A) > 0)
+			ft_printf("*");
+		else 
+			ft_printf(" ");
+	}
+	if ((CUR_DEBUG & FIXED_WIDTH) > 0)
+		ft_printf("%4i", (int)(intptr_t)content);
+	else
+		ft_printf("%i", (int)(intptr_t)content);
 }

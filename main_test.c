@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:27:18 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 17:20:19 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:37:13 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	performance_tests(void);
 
 int	main(void)
 {
-	errors();
+	/*errors();
 	op_tests();
 	sort_turk_price_tests();
 	sort_turk_threes_tests();
-	sort_mark_lis_tests();
+	sort_mark_lis_tests();*/
 	performance_tests();
 	return (0);
 }

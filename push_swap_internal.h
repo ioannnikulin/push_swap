@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 15:34:19 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 20:30:02 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@
 # define STAGE_RESULT_PRINT 262144
 # define OPS_COUNT_TOTAL 524288
 # define LIS_DEBUG 2097152
-# define MAX_DEBUG 4194303
+# define FIXED_WIDTH 4194304
+# define MAX_DEBUG 8388608
 # define MANUAL_OPS (256 | 128 | 16 | 32)
 # define SUBMISSION (OP_NAME | OP_TEST_NUMBERS | OP_TEST_FULLDETAILS)
-# define TURK_DEBUG (MAX_DEBUG & ~PREV & ~NEXT)
-# define CUR_DEBUG TURK_DEBUG
+# define TURK_DEBUG (OP_NAME | BORDER_PRINTOUT | OP_TEST_FULLDETAILS | STAGE_RESULT_PRINT | OPS_COUNT_TOTAL | STACK_HEADER_FOOTER | FIXED_WIDTH | LIS_DEBUG)
+# define CUR_DEBUG SUBMISSION
 
 # define LEAVE_IN_A 1
 typedef enum e_OP
@@ -42,9 +43,9 @@ typedef enum e_OP
 
 int		sort(t_dlist **a, t_dlist **b);
 int		sorted(t_dlist *root);
-int		print(t_dlist *a, t_dlist *b, void (*p)(void *));
-void	sprinter(void *content);
-void	iprinter(void *content);
+int		print(t_dlist *a, t_dlist *b, void (*p)(void *, int));
+void	sprinter(void *content, int flags);
+void	iprinter(void *content, int flags);
 void	op_sa(t_dlist **a);
 void	op_sb(t_dlist **b);
 void	op_ss(t_dlist **a, t_dlist **b);

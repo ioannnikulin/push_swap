@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 16:09:01 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/03 19:02:53 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_turk_params
 typedef struct s_turk_rots
 {
 	t_dlist *obj;
-	int		offset;
 	int		ras;
 	int		rbs;
 	int		rrs;

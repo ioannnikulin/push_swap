@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 15:52:54 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 20:21:31 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_dlist	*mark_lis(t_dlist *a, int asz)
 	if ((CUR_DEBUG & LIS_DEBUG) > 0)
 	{
 		ft_printf("smallest element is ");
-		iprinter(a->content);
+		iprinter(a->content, a->flags);
 		ft_printf("\n");
 	}
 	lis(a, a);
