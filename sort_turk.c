@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 15:10:05 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 20:48:16 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,7 @@ static int	debut(t_turk_params *p)
 {
 	int	turns;
 
-	int srt = sorted(*(p->a));
-	if (p->asz < 2 || sorted(*(p->a)) == p->asz || srt == p->asz)
+	if (p->asz < 2 || sorted(*(p->a)) == p->asz)
 		return (0);
 	if (p->asz == 2)
 	{
@@ -122,6 +121,8 @@ static int	debut(t_turk_params *p)
 	if (p->asz == 3)
 		return (three(p->a) + pour_into_a(p));
 	p->lis_start = mark_lis(*(p->a), p->asz);
+	if (p->lis_start->lisl == p->asz)
+		return (pour_into_a(p));
 	turns = send_one_to_b(p);
 	if (p->lis_start->lisl == p->asz)
 		return (turns + pour_into_a(p));
