@@ -6,19 +6,19 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/16 21:23:46 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:26:02 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_turk_internal.h"
 
-void	rots_init(t_turk_rots *to, t_dlist *d);
-void	rots_copy(t_turk_rots from, t_turk_rots *to);
+void		rots_init(t_turk_rots *to, t_dlist *d);
+void		rots_copy(t_turk_rots from, t_turk_rots *to);
 t_turk_rots	ff(t_turk_params *p, t_turk_rots base);
 t_turk_rots	fb(t_turk_params *p, t_turk_rots base);
 t_turk_rots	bf(t_turk_params *p, t_turk_rots base);
 t_turk_rots	bb(t_turk_params *p, t_turk_rots base);
-void	calc_rbs(t_turk_params *p, t_turk_rots *rs, int toa);
+void		calc_rbs(t_turk_params *p, t_turk_rots *rs, int toa);
 
 static void	calc_price(t_turk_params *p, t_turk_rots *rs, int c, int toa)
 {
@@ -79,7 +79,7 @@ static t_dlist	*direction_hack(t_hack_params *h)
 
 t_turk_rots	find_cheapest(t_turk_params *p, int toa)
 {
-	t_dlist 	*d;
+	t_dlist		*d;
 	int			c;
 	t_turk_rots	cur;
 	t_turk_rots	best;

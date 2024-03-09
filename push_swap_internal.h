@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 20:49:12 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:35:33 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,28 @@
 # define LIS_DEBUG 2097152
 # define FIXED_WIDTH 4194304
 # define MAX_DEBUG 8388608
-# define MANUAL_OPS (256 | 128 | 16 | 32)
-# define SUBMISSION (OP_NAME | OP_TEST_NUMBERS | OP_TEST_FULLDETAILS)
-# define TURK_DEBUG (OP_NAME | BORDER_PRINTOUT | OP_TEST_FULLDETAILS | STAGE_RESULT_PRINT | OPS_COUNT_TOTAL | STACK_HEADER_FOOTER | FIXED_WIDTH | LIS_DEBUG)
+# define MANUAL_OPS 432
+# define SUBMISSION 21504
+//# define TURK_DEBUG (OP_NAME | BORDER_PRINTOUT | OP_TEST_FULLDETAILS | 
+//STAGE_RESULT_PRINT | OPS_COUNT_TOTAL | STACK_HEADER_FOOTER | FIXED_WIDTH 
+//| LIS_DEBUG)
 # define CUR_DEBUG SUBMISSION
 
 # define LEAVE_IN_A 1
+
 typedef enum e_OP
 {
-	PA, PB, SA, SB, SS, RA, RB, RR, RRA, RRB, RRR
+	PA,
+	PB,
+	SA,
+	SB,
+	SS,
+	RA,
+	RB,
+	RR,
+	RRA,
+	RRB,
+	RRR
 }	t_OP;
 
 int		sort(t_dlist **a, t_dlist **b);

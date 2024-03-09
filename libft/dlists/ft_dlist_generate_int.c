@@ -6,14 +6,14 @@
 /*   By: inikulin <inikulin@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:01:40 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/17 20:10:55 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:28:00 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static void nothing(void *c)
+static void	nothing(void *c)
 {
 	(void)c;
 }
@@ -30,7 +30,8 @@ static int	make_worm(t_dlist **root, int nums[], int sz)
 	curnode = *root;
 	while (idx < sz)
 	{
-		curnode->next = ft_dlist_new((void *)(unsigned long long)(nums[idx ++]));
+		curnode->next = ft_dlist_new((void *)
+				(unsigned long long)(nums[idx ++]));
 		if (!curnode->next)
 			return (ft_dlist_clear(root, nothing, -1));
 		curnode->next->prev = curnode;

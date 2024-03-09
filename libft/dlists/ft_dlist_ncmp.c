@@ -6,17 +6,17 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:41:58 by inikulin          #+#    #+#             */
-/*   Updated: 2024/02/10 18:45:21 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:23:56 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 #include <stdint.h>
 
-int	ft_voidptr_strcmp(void *a, void *b)
+/*int	ft_voidptr_strcmp(void *a, void *b)
 {
 	return (ft_strncmp((char *)a, (char *)b, ft_strlen((char *)a)));
-}
+}*/
 
 int	ft_voidptr_icmp(void *a, void *b)
 {
@@ -45,8 +45,8 @@ int	ft_dlist_ncmp(t_dlist *a, t_dlist *b, int n, int (*cmp)(void *, void *))
 {
 	int	cur;
 	int	alen;
-	int blen;
-	
+	int	blen;
+
 	cur = 1;
 	if (a == b)
 		return (0);
@@ -66,10 +66,10 @@ int	ft_dlist_ncmp(t_dlist *a, t_dlist *b, int n, int (*cmp)(void *, void *))
 	return (0);
 }
 
-int	ft_dlist_ncmp_str(t_dlist *a, t_dlist *b, int n)
+/*int	ft_dlist_ncmp_str(t_dlist *a, t_dlist *b, int n)
 {
 	return (ft_dlist_ncmp(a, b, n, ft_voidptr_strcmp));
-}
+}*/
 
 int	ft_dlist_ncmp_i(t_dlist *a, t_dlist *b, int n)
 {
