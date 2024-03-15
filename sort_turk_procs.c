@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_turk.c                                        :+:      :+:    :+:   */
+/*   sort_turk_procs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 20:48:16 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:24:20 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_turk_internal.h"
 
 t_turk_rots	find_cheapest(t_turk_params *p, int toa);
-int	three(t_dlist **a);
-t_dlist	*mark_lis(t_dlist *a, int asz);
 
-static int	send_cheapest(t_turk_params *p, t_turk_rots rs, int toa)
+int	send_cheapest(t_turk_params *p, t_turk_rots rs, int toa)
 {
 	while (rs.ras --)
 		op_ra(p->a);
@@ -45,7 +43,7 @@ static int	send_cheapest(t_turk_params *p, t_turk_rots rs, int toa)
 	return (rs.total);
 }
 
-static int	pour_into_a(t_turk_params *p)
+int	pour_into_a(t_turk_params *p)
 {
 	int		turns;
 	t_dlist	*rt;
@@ -69,27 +67,32 @@ static int	pour_into_a(t_turk_params *p)
 	return (turns);
 }
 
-static int	send_one_to_b(t_turk_params *p)
+static int	closest_nonblocked(t_turk_params *p, int fwd)
 {
-	int	fwd;
-	int	bwd;
+	int		res;
 	t_dlist	*np;
-	int	res;
 
-	fwd = 0;
-	bwd = 0;
 	np = *(p->a);
+	res = 0;
 	while ((np->flags & LEAVE_IN_A) > 0)
 	{
-		np = np->next;
-		fwd ++;
+		if (fwd)
+			np = np->next;
+		else
+			np = np->prev;
+		res ++;
 	}
-	np = *(p->a);
-	while ((np->flags & LEAVE_IN_A) > 0)
-	{
-		np = np->prev;
-		bwd ++;
-	}
+	return (res);
+}
+
+int	send_one_to_b(t_turk_params *p)
+{
+	int		fwd;
+	int		bwd;
+	int		res;
+
+	fwd = closest_nonblocked(p, 1);
+	bwd = closest_nonblocked(p, 0);
 	p->asz --;
 	p->bsz ++;
 	if (fwd < bwd)
@@ -105,61 +108,4 @@ static int	send_one_to_b(t_turk_params *p)
 		op_rra(p->a);
 	op_pb(p->a, p->b);
 	return (res);
-}
-
-static int	debut(t_turk_params *p)
-{
-	int	turns;
-
-	if (p->asz < 2 || sorted(*(p->a)) == p->asz)
-		return (0);
-	if (p->asz == 2)
-	{
-		op_sa(p->a);
-		return (1);
-	}
-	if (p->asz == 3)
-		return (three(p->a) + pour_into_a(p));
-	p->lis_start = mark_lis(*(p->a), p->asz);
-	if (p->lis_start->lisl == p->asz)
-		return (pour_into_a(p));
-	turns = send_one_to_b(p);
-	if (p->lis_start->lisl == p->asz)
-		return (turns + pour_into_a(p));
-	if (p->asz == 3)
-		return (three(p->a) + pour_into_a(p));
-	turns += send_one_to_b(p);
-	if (p->lis_start->lisl == p->asz)
-		return (turns + pour_into_a(p));
-	if (p->asz == 3)
-		return (three(p->a) + pour_into_a(p));
-	return (-turns);
-}
-
-int	sort_turk(t_dlist **a, t_dlist **b)
-{
-	int				turns;
-	t_turk_params	params;
-	int				sent;
-
-	params.asz = ft_dlist_size(*a);
-	params.bsz = 0;
-	params.a = a;
-	params.b = b;
-	turns = debut(&params);
-	if ((CUR_DEBUG & STAGE_RESULT_PRINT) > 0)
-		print(*a, *b, iprinter);
-	if (turns >= 0)
-		return (turns);
-	turns = -turns;
-	sent = 2;
-	while (params.asz > params.lis_start->lisl)
-	{
-		turns += send_cheapest(&params, find_cheapest(&params, 0), 0);
-		sent ++;
-	}
-	turns += pour_into_a(&params);
-	if ((CUR_DEBUG & STAGE_RESULT_PRINT) > 0)
-		print(*a, *b, iprinter);
-	return (turns + 2);
 }

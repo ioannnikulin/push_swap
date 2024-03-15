@@ -6,13 +6,11 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/15 21:45:39 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:23:00 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_internal.h"
-
-int	lis(t_dlist *obj, t_dlist *end);
 
 static void	loop(t_dlist **best, t_dlist *end, t_dlist *obj)
 {
