@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 21:40:08 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:18:25 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,36 @@ static void	calc_price(t_turk_params *p, t_turk_rots *rs, int c, int toa)
 	rots_copy(best, rs);
 }
 
-static t_dlist	*direction_hack(t_turk_params *p, int toa,
-	int mode, t_turk_rots *best, int *c)
+typedef struct s_hack_params
+{
+	t_turk_params	*p;
+	int				toa;
+	int				mode;
+	t_turk_rots		*best;
+	int				*c;
+}	t_hack_params;
+
+static t_dlist	*direction_hack(t_hack_params *h)
 {
 	t_dlist	**t;
 
-	if (toa)
+	if (h->toa)
 	{
-		t = p->a;
-		p->a = p->b;
-		p->b = t;
-		ft_swap_i(&(p->asz), &(p->bsz));
+		t = h->p->a;
+		h->p->a = h->p->b;
+		h->p->b = t;
+		ft_swap_i(&(h->p->asz), &(h->p->bsz));
 	}
-	if (mode == 1)
-		rots_init(best, 0);
-	if (mode == 2 && toa)
+	if (h->mode == 1)
+		rots_init(h->best, 0);
+	if (h->mode == 2 && h->toa)
 	{
-		ft_swap_i(&(best->ras), &(best->rbs));
-		ft_swap_i(&(best->rras), &(best->rrbs));
+		ft_swap_i(&(h->best->ras), &(h->best->rbs));
+		ft_swap_i(&(h->best->rras), &(h->best->rrbs));
 	}
-	if (c)
-		*c = 0;
-	return (*(p->a));
+	if (h->c)
+		*(h->c) = 0;
+	return (*(h->p->a));
 }
 
 t_turk_rots	find_cheapest(t_turk_params *p, int toa)
@@ -77,22 +85,23 @@ t_turk_rots	find_cheapest(t_turk_params *p, int toa)
 	t_turk_rots	best;
 	int			rc;
 
-	d = direction_hack(p, toa, 1, &best, &c);
+	d = direction_hack(&(t_hack_params){p, toa, 1, &best, &c});
 	while (c < p->asz)
 	{
 		rc = p->asz - c - (p->asz == 1);
-		if ((toa || (d->flags & LEAVE_IN_A) == 0) && (*ft_min_int(&c, &rc) < best.total - 1))
+		if ((toa || (d->flags & LEAVE_IN_A) == 0) && \
+			(*ft_min_int(&c, &rc) < best.total - 1))
 		{
 			rots_init(&cur, d);
 			calc_price(p, &cur, c, toa);
 			if (cur.total < best.total)
 				rots_copy(cur, &best);
 			if ((CUR_DEBUG & TURK_EACH_NODE_PRICES) > 0)
-				ft_printf("best option for sending node #%i would take %i operations\n", c, cur.total);
+				ft_printf("node #%i - best %i operations\n", c, cur.total);
 		}
 		d = d->next;
 		c ++;
 	}
-	direction_hack(p, toa, 2, &best, 0);
+	direction_hack(&(t_hack_params){p, toa, 2, &best, 0});
 	return (best);
 }
