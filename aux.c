@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 21:31:38 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:57:55 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,19 @@ static int	make_node(t_dlist **a, int curval)
 {
 	t_dlist	*cur;
 
-	cur = *a;
+	cur = 0;
+	if (a)
+		cur = *a;
 	while (cur)
 	{
 		if ((int)(intptr_t)cur->content == curval)
 			return (1);
 		cur = cur->next;
 	}
-	ft_dlist_add_back(a, ft_dlist_new((void *)(intptr_t)curval));
+	cur = ft_dlist_new((void *)(intptr_t)curval);
+	if (!cur)
+		return (1);
+	ft_dlist_add_back(a, cur);
 	return (0);
 }
 
@@ -81,8 +86,8 @@ int	parse_params(t_dlist **a, int argc, char **argv)
 
 int	error(int ret, t_dlist **a, t_dlist **b, int *prices)
 {
-	ft_dlist_clear(a, free, 0);
-	ft_dlist_clear(b, free, 0);
+	ft_dlist_clear(a, 0, 0);
+	ft_dlist_clear(b, 0, 0);
 	free(prices);
 	ft_fprintf(2, "Error\n");
 	return (ret);
