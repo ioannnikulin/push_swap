@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/16 21:29:50 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:20:19 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	loop(t_dlist **best, t_dlist *end, t_dlist *obj)
 	int		curlis;
 
 	cur = obj->next;
-	curlis = lis(cur, end);
 	while (cur != end)
 	{
+		curlis = lis(cur, end);
 		if ((ft_voidptr_icmp(obj->content, cur->content) < 0) && \
 			(!(*best) || (curlis >= (*best)->lisl)))
 			*best = cur;

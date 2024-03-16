@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 19:50:01 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/15 21:35:36 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:25:22 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@ static t_dlist	*smallest(t_dlist *cur, t_dlist *end)
 	if (ft_voidptr_icmp(cur->content, res->content) < 0)
 		res = cur;
 	return (res);
+}
+t_dlist	*mark(t_dlist *best)
+{
+	t_dlist	*cur;
+
+	cur = best;
+	while (cur != 0)
+	{
+		cur->flags = cur->flags | LEAVE_IN_A;
+		if ((CUR_DEBUG & LIS_DEBUG) > 0)
+		{
+			iprinter(cur->content, cur->flags);
+			ft_printf(" ");
+		}
+		cur = cur->lisn;
+	}
+	if ((CUR_DEBUG & LIS_DEBUG) > 0)
+		ft_printf("\n");
+	return (best);
 }
 
 t_dlist	*mark_lis(t_dlist *a, int asz)
@@ -46,11 +65,5 @@ t_dlist	*mark_lis(t_dlist *a, int asz)
 			break ;
 		cur = cur->next;
 	}
-	cur = best;
-	while (cur != 0)
-	{
-		cur->flags = cur->flags | LEAVE_IN_A;
-		cur = cur->lisn;
-	}
-	return (best);
+	return (mark(best));
 }

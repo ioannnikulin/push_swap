@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 21:35:33 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:20:48 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define OPS_COUNT_TOTAL 524288
 # define LIS_DEBUG 2097152
 # define FIXED_WIDTH 4194304
-# define MAX_DEBUG 8388608
+# define MAX_DEBUG 8388607
 # define MANUAL_OPS 432
 # define SUBMISSION 21504
 //# define TURK_DEBUG (OP_NAME | BORDER_PRINTOUT | OP_TEST_FULLDETAILS | 
