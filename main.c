@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/16 21:28:32 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:25:58 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	if (!parse_params(&a, argc, argv))
-		return (error(0, 0, 0, 0));
+		return (error(0, 0, 0));
 	if ((CUR_DEBUG & STAGE_RESULT_PRINT) > 0)
 		print(a, b, iprinter);
 	ops = sort(&a, &b);
