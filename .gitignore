@@ -1,4 +1,5 @@
 *.o
+*.oo
 push_swap
 libft/tests/*
 *.a

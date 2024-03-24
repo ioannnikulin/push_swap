@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:28:14 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/16 17:57:55 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/24 16:02:13 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,10 @@ int	parse_params(t_dlist **a, int argc, char **argv)
 	return (ft_dlist_size(*a));
 }
 
-int	error(int ret, t_dlist **a, t_dlist **b, int *prices)
+int	error(int ret, t_dlist **a, t_dlist **b)
 {
 	ft_dlist_clear(a, 0, 0);
 	ft_dlist_clear(b, 0, 0);
-	free(prices);
 	ft_fprintf(2, "Error\n");
 	return (ret);
 }

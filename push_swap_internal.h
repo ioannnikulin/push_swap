@@ -6,7 +6,7 @@
 /*   By: inikulin <inikulin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:01:39 by inikulin          #+#    #+#             */
-/*   Updated: 2024/03/09 21:35:33 by inikulin         ###   ########.fr       */
+/*   Updated: 2024/03/24 16:05:33 by inikulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,17 @@
 # define OPS_COUNT_TOTAL 524288
 # define LIS_DEBUG 2097152
 # define FIXED_WIDTH 4194304
-# define MAX_DEBUG 8388608
+# define MAX_DEBUG 8388607
 # define MANUAL_OPS 432
 # define SUBMISSION 21504
 //# define TURK_DEBUG (OP_NAME | BORDER_PRINTOUT | OP_TEST_FULLDETAILS | 
 //STAGE_RESULT_PRINT | OPS_COUNT_TOTAL | STACK_HEADER_FOOTER | FIXED_WIDTH 
 //| LIS_DEBUG)
-# define CUR_DEBUG SUBMISSION
+# if CHECKER == 1
+#  define CUR_DEBUG 0
+# else
+#  define CUR_DEBUG SUBMISSION
+# endif
 
 # define LEAVE_IN_A 1
 
@@ -71,5 +75,5 @@ void	op_rra(t_dlist **a);
 void	op_rrb(t_dlist **b);
 void	op_rrr(t_dlist **a, t_dlist **b);
 void	apply(t_dlist **a, t_dlist **b, t_OP op);
-int		error(int ret, t_dlist **a, t_dlist **b, int *prices);
+int		error(int ret, t_dlist **a, t_dlist **b);
 #endif
