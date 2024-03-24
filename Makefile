@@ -26,7 +26,7 @@ all: $(NAME)
 libft:
 	$(PREFIX)cd libft && make re
 
-$(NAME): BONUSFLAG = 
+$(NAME): BONUSFLAG = -DCHECKER=0
 $(NAME): EXEC_NAME = $(NAME)
 $(NAME): libft endpoint
 
